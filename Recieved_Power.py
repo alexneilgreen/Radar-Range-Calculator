@@ -1,10 +1,11 @@
 # tab1_content.py
-
+#TODO Finish Conversions
 import tkinter as tk
 from tkinter import ttk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from PIL import Image, ImageTk
+import UnitConversion
 
 
 
@@ -81,8 +82,11 @@ def validateInput(input):
 
         return False
 
-def calculate(pt, gt, gr, f, rcs, r, pr):
+def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_unit):
 
+    #TODO print(f"{pt_unit}, {f_unit}, {rcs_unit}, {r_unit}, {pr_unit}")
+
+    # Check if input is valid for calculation
     input = []
     input.append(pt)
     input.append(gt)
@@ -91,10 +95,6 @@ def calculate(pt, gt, gr, f, rcs, r, pr):
     input.append(rcs)
     input.append(r)
     input.append(pr)
-
-
-
-    # Check if input is valid for calculation
     if validateInput(input) :
         return
     else : 
@@ -107,12 +107,12 @@ def calculate(pt, gt, gr, f, rcs, r, pr):
 
         print("Solve for Pᵣ\n")
 
-        pt = float(pt)
+        pt = float(UnitConversion.convert_to_dBW(pt, pt_unit))
         gt = float(gt)
         gr = float(gr)
-        f = float(f)
-        rcs = float(rcs)
-        r = float(r)
+        f = float(UnitConversion.convert_to_GHz(f, f_unit))
+        rcs = float(UnitConversion.convert_to_m2(rcs, rcs_unit))
+        r = float(UnitConversion.convert_to_dBW(r, r_unit))
 
         print(" Pₜ * Gₜ * Gᵣ * λ² * σ")
         print("---------------------- = Pᵣ")
@@ -139,10 +139,10 @@ def calculate(pt, gt, gr, f, rcs, r, pr):
 
         gt = float(gt)
         gr = float(gr)
-        f = float(f)
-        rcs = float(rcs)
-        r = float(r)
-        pr = float(pr)
+        f = float(UnitConversion.convert_to_GHz(f, f_unit))
+        rcs = float(UnitConversion.convert_to_m2(rcs, rcs_unit))
+        r = float(UnitConversion.convert_to_NMI(r, r_unit))
+        pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
 
         print(" Pᵣ * (4π)³ * R⁴")
         print("----------------- = Pₜ")
@@ -167,12 +167,12 @@ def calculate(pt, gt, gr, f, rcs, r, pr):
 
         print("Solve for Gₜ\n")
 
-        pt = float(pt)
+        pt = float(UnitConversion.convert_to_dBW(pt, pt_unit))
         gr = float(gr)
-        f = float(f)
-        rcs = float(rcs)
-        r = float(r)
-        pr = float(pr)
+        f = float(UnitConversion.convert_to_GHz(f, f_unit))
+        rcs = float(UnitConversion.convert_to_m2(rcs, rcs_unit))
+        r = float(UnitConversion.convert_to_NMI(r, r_unit))
+        pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
 
         print(" Pᵣ * (4π)³ * R⁴")
         print("----------------- = Gₜ")
@@ -197,12 +197,12 @@ def calculate(pt, gt, gr, f, rcs, r, pr):
 
         print("Solve for Gᵣ\n")
 
-        pt = float(pt)
+        pt = float(UnitConversion.convert_to_dBW(pt, pt_unit))
         gt = float(gt)
-        f = float(f)
-        rcs = float(rcs)
-        r = float(r)
-        pr = float(pr)
+        f = float(UnitConversion.convert_to_GHz(f, f_unit))
+        rcs = float(UnitConversion.convert_to_m2(rcs, rcs_unit))
+        r = float(UnitConversion.convert_to_NMI(r, r_unit))
+        pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
 
         print(" Pᵣ * (4π)³ * R⁴")
         print("----------------- = Gᵣ")
@@ -227,12 +227,12 @@ def calculate(pt, gt, gr, f, rcs, r, pr):
 
         print("Solve for λ and ƒ\n")
 
-        pt = float(pt)
+        pt = float(UnitConversion.convert_to_dBW(pt, pt_unit))
         gt = float(gt)
         gr = float(gr)
-        rcs = float(rcs)
-        r = float(r)
-        pr = float(pr)
+        rcs = float(UnitConversion.convert_to_m2(rcs, rcs_unit))
+        r = float(UnitConversion.convert_to_NMI(r, r_unit))
+        pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
 
         print(" Pᵣ * (4π)³ * R⁴")
         print("----------------- = λ²")
@@ -258,12 +258,12 @@ def calculate(pt, gt, gr, f, rcs, r, pr):
 
         print("Solve for σ\n")
 
-        pt = float(pt)
+        pt = float(UnitConversion.convert_to_dBW(pt, pt_unit))
         gt = float(gt)
         gr = float(gr)
-        f = float(f)
-        r = float(r)
-        pr = float(pr)
+        f = float(UnitConversion.convert_to_GHz(f, f_unit))
+        r = float(UnitConversion.convert_to_NMI(r, r_unit))
+        pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
 
         print(" Pᵣ * (4π)³ * R⁴")
         print("----------------- = σ")
@@ -288,12 +288,12 @@ def calculate(pt, gt, gr, f, rcs, r, pr):
 
         print("Solve for R\n")
 
-        pt = float(pt)
+        pt = float(UnitConversion.convert_to_dBW(pt, pt_unit))
         gt = float(gt)
         gr = float(gr)
-        f = float(f)
-        rcs = float(rcs)
-        pr = float(pr)
+        f = float(UnitConversion.convert_to_GHz(f, f_unit))
+        rcs = float(UnitConversion.convert_to_m2(rcs, rcs_unit))
+        pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
 
         print(" Pₜ * Gₜ * Gᵣ * λ² * σ")
         print("---------------------- = R⁴")
@@ -380,9 +380,9 @@ def create_RP_tab_content(tab1):
     pr_unit_menu.grid(row=7, column=2, padx=10, pady=10)
 
     # Calc button
-    btn_plot = tk.Button(tab1, text="Calc", command=lambda: calculate(pt_entry.get(), gt_entry.get(), gr_entry.get(), f_entry.get(), 
-                                                                      rcs_entry.get(), r_entry.get(), pr_entry.get()), 
-                                                                      font=default_font, width=7, bg='darkgray')
+    btn_plot = tk.Button(tab1, text="Calc", command=lambda: calculate(pt_entry.get(), gt_entry.get(), gr_entry.get(), f_entry.get(), rcs_entry.get(), 
+                                                                      r_entry.get(), pr_entry.get(), pt_unit.get(), f_unit.get(), rcs_unit.get(), 
+                                                                      r_unit.get(), pr_unit.get()), font=default_font, width=7, bg='darkgray')
     btn_plot.grid(row=7, column=3, padx=10, pady=10)
 
     # Insert image
