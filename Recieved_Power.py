@@ -103,7 +103,7 @@ def calculate(pt, gt, gr, f, rcs, r, pr):
 
 
     # Calculations Start
-    if not pr: 
+    if not pr:
 
         print("Solve for Pᵣ\n")
 
@@ -120,7 +120,7 @@ def calculate(pt, gt, gr, f, rcs, r, pr):
 
         w = (3 * pow(10, 8))/f
 
-        num = pt * gt * gr * w * rcs
+        num = pt * gt * gr * pow(w, 2) * rcs
         den = pow((4 * 3.14159265), 3) * pow(r, 4)
 
         pr = num/den
@@ -133,7 +133,7 @@ def calculate(pt, gt, gr, f, rcs, r, pr):
 
         print("\n---------\n")
 
-    elif not pt: 
+    elif not pt:
         
         print("Solve for Pₜ\n")
 
@@ -151,29 +151,170 @@ def calculate(pt, gt, gr, f, rcs, r, pr):
         w = (3 * pow(10, 8))/f
 
         num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
-        den = gt * gr * w * rcs
+        den = gt * gr * pow(w, 2) * rcs
 
         pt = num/den
 
-        print(f" {pr} * (4π)³ * {r}⁴")
-        print(f"--------------------------- = Pₜ")
+        print(f"\t{pr} * (4π)³ * {r}⁴")
+        print(f"--------------------------------  = {pt}")
         print(f" {gt} * {gr} * {w}² * {rcs}\n")
 
         print(f"Pₜ = {pt}")
 
         print("\n---------\n")
 
-    elif not gt: 
-        print("Pr = NULL")
-    elif not gr: 
-        print("Pr = NULL")
-    elif not f: 
-        print("Pr = NULL")
-    elif not rcs: 
-        print("Pr = NULL")
-    elif not r: 
-        print("Pr = NULL")
-    else: 
+    elif not gt:
+
+        print("Solve for Gₜ\n")
+
+        pt = float(pt)
+        gr = float(gr)
+        f = float(f)
+        rcs = float(rcs)
+        r = float(r)
+        pr = float(pr)
+
+        print(" Pᵣ * (4π)³ * R⁴")
+        print("----------------- = Gₜ")
+        print(" Pₜ * Gᵣ * λ² * σ\n")
+
+        w = (3 * pow(10, 8))/f
+
+        num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
+        den = pt * gr * pow(w, 2) * rcs
+
+        gt = num/den
+
+        print(f"\t{pr} * (4π)³ * {r}⁴")
+        print(f"--------------------------------  = {gt}")
+        print(f" {pt} * {gr} * {w}² * {rcs}\n")
+
+        print(f"Gₜ = {gt}")
+
+        print("\n---------\n")
+
+    elif not gr:
+
+        print("Solve for Gᵣ\n")
+
+        pt = float(pt)
+        gt = float(gt)
+        f = float(f)
+        rcs = float(rcs)
+        r = float(r)
+        pr = float(pr)
+
+        print(" Pᵣ * (4π)³ * R⁴")
+        print("----------------- = Gᵣ")
+        print(" Pₜ * Gₜ * λ² * σ\n")
+
+        w = (3 * pow(10, 8))/f
+
+        num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
+        den = pt * gt * pow(w, 2) * rcs
+
+        gr = num/den
+
+        print(f"\t{pr} * (4π)³ * {r}⁴")
+        print(f"--------------------------------  = {gr}")
+        print(f" {pt} * {gt} * {w}² * {rcs}\n")
+
+        print(f"Gᵣ = {gr}")
+
+        print("\n---------\n")
+
+    elif not f:
+
+        print("Solve for λ and ƒ\n")
+
+        pt = float(pt)
+        gt = float(gt)
+        gr = float(gr)
+        rcs = float(rcs)
+        r = float(r)
+        pr = float(pr)
+
+        print(" Pᵣ * (4π)³ * R⁴")
+        print("----------------- = λ²")
+        print(" Pₜ * Gₜ * Gᵣ * σ\n")
+
+        num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
+        den = pt * gt * gr * rcs
+
+        w = pow(num/den, 0.5)
+
+        f = (3 * pow(10, 8))/w
+
+        print(f"\t{pr} * (4π)³ * {r}⁴")
+        print(f"--------------------------------  = {w}²")
+        print(f" {pt} * {gt} * {gr} * {rcs}\n")
+
+        print(f"λ = {w}")
+        print(f"ƒ = {f}")
+
+        print("\n---------\n")
+
+    elif not rcs:
+
+        print("Solve for σ\n")
+
+        pt = float(pt)
+        gt = float(gt)
+        gr = float(gr)
+        f = float(f)
+        r = float(r)
+        pr = float(pr)
+
+        print(" Pᵣ * (4π)³ * R⁴")
+        print("----------------- = σ")
+        print(" Pₜ * Gₜ * Gᵣ * λ²\n")
+
+        w = (3 * pow(10, 8))/f
+
+        num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
+        den = pt * gt * gr * pow(w, 2)
+
+        rcs = num/den
+
+        print(f"\t{pr} * (4π)³ * {r}⁴")
+        print(f"--------------------------------  = {rcs}")
+        print(f" {pt} * {gt} * {gr} * {w}²\n")
+
+        print(f"σ = {rcs}")
+
+        print("\n---------\n")
+
+    elif not r:
+
+        print("Solve for R\n")
+
+        pt = float(pt)
+        gt = float(gt)
+        gr = float(gr)
+        f = float(f)
+        rcs = float(rcs)
+        pr = float(pr)
+
+        print(" Pₜ * Gₜ * Gᵣ * λ² * σ")
+        print("---------------------- = R⁴")
+        print("     Pᵣ * (4π)³\n")
+
+        w = (3 * pow(10, 8))/f
+
+        num = pt * gt * gr * pow(w, 2) * rcs
+        den = pow((4 * 3.14159265), 3) * pr
+
+        r = pow(num/den, 0.25)
+
+        print(f"  {pt} * {gt} * {gr} * (C/{f})² * {rcs}")
+        print(f"------------------------------------------ = {r}⁴")
+        print(f"\t   (4π)³ * {pr}\n")
+
+        print(f"R = {r}")
+
+        print("\n---------\n")
+
+    else:
         print("Error")
 
     return
