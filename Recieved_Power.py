@@ -114,20 +114,20 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
         rcs = float(UnitConversion.convert_to_m2(rcs, rcs_unit))
         r = float(UnitConversion.convert_to_dBW(r, r_unit))
 
-        print(" Pₜ * Gₜ * Gᵣ * λ² * σ")
-        print("---------------------- = Pᵣ")
-        print("     (4π)³ * R⁴\n")
+        print("\t Pₜ * Gₜ * Gᵣ * λ² * σ")
+        print("\t---------------------- = Pᵣ")
+        print("\t     (4π)³ * R⁴\n")
 
         w = (3 * pow(10, 8))/f
 
         num = pt * gt * gr * pow(w, 2) * rcs
         den = pow((4 * 3.14159265), 3) * pow(r, 4)
 
-        pr = num/den
+        pr = round(num/den, 3)
 
-        print(f"  {pt} * {gt} * {gr} * (C/{f})² * {rcs}")
-        print(f"------------------------------------------ = {pr}")
-        print(f"\t   (4π)³ * {r}⁴\n")
+        print(f"\t  {pt} * {gt} * {gr} * (C/{f})² * {rcs}")
+        print(f"\t------------------------------------------ = {pr}")
+        print(f"\t\t   (4π)³ * {r}⁴\n")
 
         print(f"Pᵣ = {pr}")
 
@@ -144,20 +144,20 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
         r = float(UnitConversion.convert_to_NMI(r, r_unit))
         pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
 
-        print(" Pᵣ * (4π)³ * R⁴")
-        print("----------------- = Pₜ")
-        print(" Gₜ * Gᵣ * λ² * σ\n")
+        print("\t Pᵣ * (4π)³ * R⁴")
+        print("\t----------------- = Pₜ")
+        print("\t Gₜ * Gᵣ * λ² * σ\n")
 
         w = (3 * pow(10, 8))/f
 
         num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
         den = gt * gr * pow(w, 2) * rcs
 
-        pt = num/den
+        pt = round(num/den, 3)
 
-        print(f"\t{pr} * (4π)³ * {r}⁴")
-        print(f"--------------------------------  = {pt}")
-        print(f" {gt} * {gr} * {w}² * {rcs}\n")
+        print(f"\t\t{pr} * (4π)³ * {r}⁴")
+        print(f"\t--------------------------------  = {pt}")
+        print(f"\t {gt} * {gr} * {w}² * {rcs}\n")
 
         print(f"Pₜ = {pt}")
 
@@ -174,20 +174,20 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
         r = float(UnitConversion.convert_to_NMI(r, r_unit))
         pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
 
-        print(" Pᵣ * (4π)³ * R⁴")
-        print("----------------- = Gₜ")
-        print(" Pₜ * Gᵣ * λ² * σ\n")
+        print("\t Pᵣ * (4π)³ * R⁴")
+        print("\t----------------- = Gₜ")
+        print("\t Pₜ * Gᵣ * λ² * σ\n")
 
         w = (3 * pow(10, 8))/f
 
         num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
         den = pt * gr * pow(w, 2) * rcs
 
-        gt = num/den
+        gt = round(num/den, 3)
 
-        print(f"\t{pr} * (4π)³ * {r}⁴")
-        print(f"--------------------------------  = {gt}")
-        print(f" {pt} * {gr} * {w}² * {rcs}\n")
+        print(f"\t\t{pr} * (4π)³ * {r}⁴")
+        print(f"\t--------------------------------  = {gt}")
+        print(f"\t {pt} * {gr} * {w}² * {rcs}\n")
 
         print(f"Gₜ = {gt}")
 
@@ -204,20 +204,20 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
         r = float(UnitConversion.convert_to_NMI(r, r_unit))
         pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
 
-        print(" Pᵣ * (4π)³ * R⁴")
-        print("----------------- = Gᵣ")
-        print(" Pₜ * Gₜ * λ² * σ\n")
+        print("\t Pᵣ * (4π)³ * R⁴")
+        print("\t----------------- = Gᵣ")
+        print("\t Pₜ * Gₜ * λ² * σ\n")
 
         w = (3 * pow(10, 8))/f
 
         num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
         den = pt * gt * pow(w, 2) * rcs
 
-        gr = num/den
+        gr = round(num/den, 3)
 
-        print(f"\t{pr} * (4π)³ * {r}⁴")
-        print(f"--------------------------------  = {gr}")
-        print(f" {pt} * {gt} * {w}² * {rcs}\n")
+        print(f"\t\t{pr} * (4π)³ * {r}⁴")
+        print(f"\t--------------------------------  = {gr}")
+        print(f"\t {pt} * {gt} * {w}² * {rcs}\n")
 
         print(f"Gᵣ = {gr}")
 
@@ -234,20 +234,20 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
         r = float(UnitConversion.convert_to_NMI(r, r_unit))
         pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
 
-        print(" Pᵣ * (4π)³ * R⁴")
-        print("----------------- = λ²")
-        print(" Pₜ * Gₜ * Gᵣ * σ\n")
+        print("\t Pᵣ * (4π)³ * R⁴")
+        print("\t----------------- = λ²")
+        print("\t Pₜ * Gₜ * Gᵣ * σ\n")
 
         num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
         den = pt * gt * gr * rcs
 
-        w = pow(num/den, 0.5)
+        w = round(pow(num/den, 0.5), 3)
 
-        f = (3 * pow(10, 8))/w
+        f = round((3 * pow(10, 8))/w, 3)
 
-        print(f"\t{pr} * (4π)³ * {r}⁴")
-        print(f"--------------------------------  = {w}²")
-        print(f" {pt} * {gt} * {gr} * {rcs}\n")
+        print(f"\t\t{pr} * (4π)³ * {r}⁴")
+        print(f"\t--------------------------------  = {w}²")
+        print(f"\t {pt} * {gt} * {gr} * {rcs}\n")
 
         print(f"λ = {w}")
         print(f"ƒ = {f}")
@@ -265,20 +265,20 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
         r = float(UnitConversion.convert_to_NMI(r, r_unit))
         pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
 
-        print(" Pᵣ * (4π)³ * R⁴")
-        print("----------------- = σ")
-        print(" Pₜ * Gₜ * Gᵣ * λ²\n")
+        print("\t Pᵣ * (4π)³ * R⁴")
+        print("\t----------------- = σ")
+        print("\t Pₜ * Gₜ * Gᵣ * λ²\n")
 
         w = (3 * pow(10, 8))/f
 
         num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
         den = pt * gt * gr * pow(w, 2)
 
-        rcs = num/den
+        rcs = round(num/den, 3)
 
-        print(f"\t{pr} * (4π)³ * {r}⁴")
-        print(f"--------------------------------  = {rcs}")
-        print(f" {pt} * {gt} * {gr} * {w}²\n")
+        print(f"\t\t{pr} * (4π)³ * {r}⁴")
+        print(f"\t--------------------------------  = {rcs}")
+        print(f"\t {pt} * {gt} * {gr} * {w}²\n")
 
         print(f"σ = {rcs}")
 
@@ -295,20 +295,20 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
         rcs = float(UnitConversion.convert_to_m2(rcs, rcs_unit))
         pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
 
-        print(" Pₜ * Gₜ * Gᵣ * λ² * σ")
-        print("---------------------- = R⁴")
-        print("     Pᵣ * (4π)³\n")
+        print("\t Pₜ * Gₜ * Gᵣ * λ² * σ")
+        print("\t---------------------- = R⁴")
+        print("\t     Pᵣ * (4π)³\n")
 
         w = (3 * pow(10, 8))/f
 
         num = pt * gt * gr * pow(w, 2) * rcs
         den = pow((4 * 3.14159265), 3) * pr
 
-        r = pow(num/den, 0.25)
+        r = round(pow(num/den, 0.25), 3)
 
-        print(f"  {pt} * {gt} * {gr} * (C/{f})² * {rcs}")
-        print(f"------------------------------------------ = {r}⁴")
-        print(f"\t   (4π)³ * {pr}\n")
+        print(f"\t  {pt} * {gt} * {gr} * (C/{f})² * {rcs}")
+        print(f"\t------------------------------------------ = {r}⁴")
+        print(f"\t\t   (4π)³ * {pr}\n")
 
         print(f"R = {r}")
 

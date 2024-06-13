@@ -1,10 +1,12 @@
 # tab3
-
+#TODO Finish Conversions
+#TODO Finish Second 2 buttons and equations
 import tkinter as tk
 from tkinter import ttk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from PIL import Image, ImageTk
+import UnitConversion
 
 
 
@@ -22,13 +24,339 @@ units_R = ["NMI", "KM", "M"]
 #/////////////////////////////////////////////////////////////////////////////
 ########## Calc ########## Calc ########## Calc ########## Calc ############
 
+def validateInput(input):
+    
+    index = 0
+    invalid_input = []
+
+    special_characters = "[$&+,:;=?@#|'\"<>_^*()%!]"
+
+    for child in input:
+
+        if any(char.isalpha() for char in child):
+            invalid_input.append(index)
+            invalid_input.append("Alphabetic Character")
+
+        elif any(char in child for char in special_characters):
+            invalid_input.append(index)
+            invalid_input.append("Special Character")
+
+        elif child == "":
+            invalid_input.append(index)
+            invalid_input.append("Null input")
+
+        index += 1
+    
+    if len(invalid_input)/2 > 1:
+
+        index = 0
+
+        print(f"Invalid input - {len(invalid_input)/2} fields")
+
+        for child in invalid_input:
+
+            if (index % 2) == 0 :
+                print(f"\tInvalid Entry on row {child}")
+            else :
+                print(f"\t\tReason {child}")
+
+            index += 1
+        
+        print("\n---------\n")
+        
+        return True
+    
+    elif len(invalid_input) == 0 :
+
+        print(f"Invalid input - All fields are full")
+        print(f"\tPlease clear one field to calculate")
+        print("\n---------\n")
+
+        return True
+    
+    else :
+
+        return False
+
 #?#?#       Pₜ * Gₜ * Gᵣ * λ² * σ
 #?#?# Pᵣ = ----------------------
 #?#?#         (4π)³ * R⁴ * Pₙ
 
-def calculate():
-    # Placeholder function for plot button
-    pass
+def calculate(pt, gt, gr, f, rcs, r, pn, snr, pt_unit, f_unit, rcs_unit, r_unit, pn_unit):
+
+    
+
+    # Check if input is valid for calculation
+    input = []
+    input.append(pt)
+    input.append(gt)
+    input.append(gr)
+    input.append(f)
+    input.append(rcs)
+    input.append(r)
+    input.append(pn)
+    input.append(snr)
+    if validateInput(input) :
+        return
+    else : 
+        pass
+
+
+
+    # Calculations Start
+    if not snr:
+
+        print("Solve for SNR\n")
+
+        pt = float(pt)
+        gt = float(gt)
+        gr = float(gr)
+        f = float(f)
+        rcs = float(rcs)
+        r = float(r)
+        pn = float(pn)
+
+        print("\t Pₜ * Gₜ * Gᵣ * λ² * σ")
+        print("\t---------------------- = SNR")
+        print("\t  (4π)³ * R⁴ * Pₙ\n")
+
+        w = (3 * pow(10, 8))/f
+
+        num = pt * gt * gr * pow(w, 2) * rcs
+        den = pow((4 * 3.14159265), 3) * pow(r, 4) * pn
+
+        snr = round(num/den, 3)
+
+        print(f"\t  {pt} * {gt} * {gr} * (C/{f})² * {rcs}")
+        print(f"\t------------------------------------------ = {snr}")
+        print(f"\t   (4π)³ * {r}⁴ * {pn}\n")
+
+        print(f"SNR = {snr}")
+
+        print("\n---------\n")
+
+    elif not pt:
+        
+        print("Solve for Pₜ\n")
+
+        gt = float(gt)
+        gr = float(gr)
+        f = float(f)
+        rcs = float(rcs)
+        r = float(r)
+        pn = float(pn)
+        snr = float(snr)
+
+        print("\t SNR * (4π)³ * R⁴ * Pₙ")
+        print("\t------------------------ = Pₜ")
+        print("\t   Gₜ * Gᵣ * λ² * σ\n")
+
+        w = (3 * pow(10, 8))/f
+
+        num =  snr * pow((4 * 3.14159265), 3) * pow(r, 4) * pn
+        den = gt * gr * pow(w, 2) * rcs
+
+        pt = round(num/den, 3)
+
+        print(f"\t {snr} * (4π)³ * {r}⁴ * {pn}")
+        print(f"\t--------------------------------  = {pt}")
+        print(f"\t {gt} * {gr} * {w}² * {rcs}\n")
+
+        print(f"Pₜ = {pt}")
+
+        print("\n---------\n")
+
+    elif not gt:
+
+        print("Solve for Gₜ\n")
+
+        pt = float(pt)
+        gr = float(gr)
+        f = float(f)
+        rcs = float(rcs)
+        r = float(r)
+        pn = float(pn)
+        snr = float(snr)
+
+        print("\t SNR * (4π)³ * R⁴ * Pₙ")
+        print("\t---------------------- = Gₜ")
+        print("\t  Pₜ * Gᵣ * λ² * σ\n")
+
+        w = (3 * pow(10, 8))/f
+
+        num =  snr * pow((4 * 3.14159265), 3) * pow(r, 4) * pn
+        den = pt * gr * pow(w, 2) * rcs
+
+        gt = round(num/den, 3)
+
+        print(f"\t {snr} * (4π)³ * {r}⁴ * {pn}")
+        print(f"\t--------------------------------  = {gt}")
+        print(f"\t {pt} * {gr} * {w}² * {rcs}\n")
+
+        print(f"Gₜ = {gt}")
+
+        print("\n---------\n")
+
+    elif not gr:
+
+        print("Solve for Gᵣ\n")
+
+        pt = float(pt)
+        gt = float(gt)
+        f = float(f)
+        rcs = float(rcs)
+        r = float(r)
+        pn = float(pn)
+        snr = float(snr)
+
+        print("\t SNR * (4π)³ * R⁴ * Pₙ")
+        print("\t----------------------- = Gᵣ")
+        print("\t   Pₜ * Gₜ * λ² * σ\n")
+
+        w = (3 * pow(10, 8))/f
+
+        num =  snr * pow((4 * 3.14159265), 3) * pow(r, 4) * pn
+        den = pt * gt * pow(w, 2) * rcs
+
+        gr = round(num/den, 3)
+
+        print(f"\t {snr} * (4π)³ * {r}⁴ * {pn}")
+        print(f"\t--------------------------------  = {gr}")
+        print(f"\t {pt} * {gt} * {w}² * {rcs}\n")
+
+        print(f"Gᵣ = {gr}")
+
+        print("\n---------\n")
+
+    elif not f:
+
+        print("Solve for λ and ƒ\n")
+
+        pt = float(pt)
+        gt = float(gt)
+        gr = float(gr)
+        rcs = float(rcs)
+        r = float(r)
+        pn = float(pn)
+        snr = float(snr)
+
+        print("\t SNR * (4π)³ * R⁴ * Pₙ")
+        print("\t----------------------- = λ²")
+        print("\t   Pₜ * Gₜ * Gᵣ * σ\n")
+
+        num =  snr * pow((4 * 3.14159265), 3) * pow(r, 4) * pn
+        den = pt * gt * gr * rcs
+
+        w = round(pow(num/den, 0.5), 3)
+
+        f = round((3 * pow(10, 8))/w, 3)
+
+        print(f"\t {snr} * (4π)³ * {r}⁴ * {pn}")
+        print(f"\t--------------------------------  = {w}²")
+        print(f"\t {pt} * {gt} * {gr} * {rcs}\n")
+
+        print(f"λ = {w}")
+        print(f"ƒ = {f}")
+
+        print("\n---------\n")
+
+    elif not rcs:
+
+        print("Solve for σ\n")
+
+        pt = float(pt)
+        gt = float(gt)
+        gr = float(gr)
+        f = float(f)
+        r = float(r)
+        pn = float(pn)
+        snr = float(snr)
+
+        print("\t SNR * (4π)³ * R⁴ * Pₙ")
+        print("\t----------------------- = σ")
+        print("\t   Pₜ * Gₜ * Gᵣ * λ²\n")
+
+        w = (3 * pow(10, 8))/f
+
+        num =  snr * pow((4 * 3.14159265), 3) * pow(r, 4) * pn
+        den = pt * gt * gr * pow(w, 2)
+
+        rcs = round(num/den, 3)
+
+        print(f"\t {snr} * (4π)³ * {r}⁴ * {pn}")
+        print(f"\t--------------------------------  = {rcs}")
+        print(f"\t {pt} * {gt} * {gr} * {w}²\n")
+
+        print(f"σ = {rcs}")
+
+        print("\n---------\n")
+
+    elif not r:
+
+        print("Solve for R\n")
+
+        pt = float(pt)
+        gt = float(gt)
+        gr = float(gr)
+        f = float(f)
+        rcs = float(rcs)
+        pn = float(pn)
+        snr = float(snr)
+
+        print("\t Pₜ * Gₜ * Gᵣ * λ² * σ")
+        print("\t---------------------- = R⁴")
+        print("\t   SNR * (4π)³ * Pₙ\n")
+
+        w = (3 * pow(10, 8))/f
+
+        num = pt * gt * gr * pow(w, 2) * rcs
+        den = pow((4 * 3.14159265), 3) * snr * pn
+
+        r = round(pow(num/den, 0.25), 3)
+
+        print(f"\t  {pt} * {gt} * {gr} * (C/{f})² * {rcs}")
+        print(f"\t------------------------------------------ = {r}⁴")
+        print(f"\t   SNR * (4π)³ * {pn}\n")
+
+        print(f"R = {r}")
+
+        print("\n---------\n")
+
+    elif not pn:
+
+        print("Solve for Pₙ\n")
+
+        pt = float(pt)
+        gt = float(gt)
+        gr = float(gr)
+        f = float(f)
+        rcs = float(rcs)
+        r = float(r)
+        snr = float(snr)
+
+        print("\t Pₜ * Gₜ * Gᵣ * λ² * σ")
+        print("\t---------------------- = Pₙ")
+        print("\t   SNR * (4π)³ * R⁴\n")
+
+        w = (3 * pow(10, 8))/f
+
+        num = pt * gt * gr * pow(w, 2) * rcs
+        den = pow((4 * 3.14159265), 3) * snr * pow(r, 4)
+
+        pn = round(num/den, 3)
+
+        print(f"\t  {pt} * {gt} * {gr} * (C/{f})² * {rcs}")
+        print(f"\t------------------------------------------ = {pn}")
+        print(f"\t   SNR * (4π)³ * {r}⁴\n")
+
+        print(f"Pₙ = {pn}")
+
+        print("\n---------\n")
+
+    else:
+        print("Error")
+
+    return
 
 #?#?#       Pₜ * Gₜ * Gᵣ * λ² * σ * nₚ
 #?#?# Pᵣ = --------------------------
@@ -111,7 +439,9 @@ def create_SNR_tab_content(tab3):
     snr_entry.grid(row=8, column=1, padx=10, pady=10)
 
     # Plot buttons
-    btn_plot = tk.Button(tab3, text="Calc", command=calculate, font=default_font, width=7, bg='darkgray')
+    btn_plot = tk.Button(tab3, text="Calc", command=lambda: calculate(pt_entry.get(), gt_entry.get(), gr_entry.get(), f_entry.get(), rcs_entry.get(), 
+                                                                      r_entry.get(), pn_entry.get(), snr_entry.get(), pt_unit.get(), f_unit.get(), rcs_unit.get(), 
+                                                                      r_unit.get(), pn_unit.get()), font=default_font, width=7, bg='darkgray')
     btn_plot.grid(row=8, column=3, padx=10, pady=10)
 
     #TODO: btn_plot = tk.Button(tab3, text="Calc CMPE", command=calculate_CMPE, font=default_font, width=7, bg='darkgray')

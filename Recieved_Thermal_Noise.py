@@ -96,11 +96,11 @@ def calculate_SNT(ts, b, b_unit, pn, pn_unit):
         ts = float(ts)
         b = float(b)
 
-        print("K * Tₛ * B = Pₙ\n")
+        print("\tK * Tₛ * B = Pₙ\n")
 
-        pn = ts * pow(1.38, -23) * b
+        pn = round(ts * pow(1.38, -23) * b, 3)
 
-        print(f"K * {ts} * {b} = {pn}\n")
+        print(f"\tK * {ts} * {b} = {pn}\n")
 
         print(f"Pₙ = {pn}")
 
@@ -113,18 +113,18 @@ def calculate_SNT(ts, b, b_unit, pn, pn_unit):
         b = float(b)
         pn = float(pn)
 
-        print("  Pₙ")
-        print("------ = Tₛ")
-        print("K * B\n")
+        print("\t  Pₙ")
+        print("\t------ = Tₛ")
+        print("\tK * B\n")
 
         num = pn
         den = pow(1.38, -23) * b
 
-        ts = num/den
+        ts = round(num/den, 3)
 
-        print(f"  {pn}")
-        print(f"------ = {ts}")
-        print(f"k * {b}\n")
+        print(f"\t  {pn}")
+        print(f"\t------ = {ts}")
+        print(f"\tk * {b}\n")
 
         print(f"Tₛ = {ts}")
 
@@ -137,18 +137,18 @@ def calculate_SNT(ts, b, b_unit, pn, pn_unit):
         ts = float(ts)
         pn = float(pn)
 
-        print("  Pₙ")
-        print("------ = B")
-        print("K * Tₛ\n")
+        print("\t  Pₙ")
+        print("\t------ = B")
+        print("\tK * Tₛ\n")
 
         num = pn
         den = pow(1.38, -23) * ts
 
-        b = num/den
+        b = round(num/den, 3)
 
-        print(f"  {pn}")
-        print(f"------ = {b}")
-        print(f"k * {ts}\n")
+        print(f"\t  {pn}")
+        print(f"\t------ = {b}")
+        print(f"\tk * {ts}\n")
 
         print(f"B = {b}")
 
@@ -180,11 +180,11 @@ def calculate_ST(f, b, b_unit, pn, pn_unit):
         f = float(f)
         b = float(b)
 
-        print("K * Tₒ * F * B = Pₙ\n")
+        print("\tK * Tₒ * F * B = Pₙ\n")
 
-        pn = pow(1.38, -23) * 290 * f * b
+        pn = round(pow(1.38, -23) * 290 * f * b, 3)
 
-        print(f"K * Tₒ * {f} * {b} = {pn}\n")
+        print(f"\tK * Tₒ * {f} * {b} = {pn}\n")
 
         print(f"Pₙ = {pn}")
 
@@ -197,18 +197,18 @@ def calculate_ST(f, b, b_unit, pn, pn_unit):
         b = float(b)
         pn = float(pn)
 
-        print("    Pₙ")
-        print("---------- = F")
-        print("K * Tₒ * B\n")
+        print("\t    Pₙ")
+        print("\t---------- = F")
+        print("\tK * Tₒ * B\n")
 
         num = pn
         den = pow(1.38, -23) * 290 * b
 
-        f = num/den
+        f = round(num/den, 3)
 
-        print(f"    {pn}")
-        print(f"---------- = F")
-        print(f"K * Tₒ * {b}\n")
+        print(f"\t    {pn}")
+        print(f"\t---------- = F")
+        print(f"\tK * Tₒ * {b}\n")
 
         print(f"F = {f}")
 
@@ -221,18 +221,18 @@ def calculate_ST(f, b, b_unit, pn, pn_unit):
         f = float(f)
         pn = float(pn)
 
-        print("    Pₙ")
-        print("---------- = B")
-        print("K * Tₒ * F\n")
+        print("\t    Pₙ")
+        print("\t---------- = B")
+        print("\tK * Tₒ * F\n")
 
         num = pn
         den = pow(1.38, -23) * 290 * f
 
-        b = num/den
+        b = round(num/den, 3)
 
-        print(f"    {pn}")
-        print(f"---------- = B")
-        print(f"K * Tₒ * {f}\n")
+        print(f"\t    {pn}")
+        print(f"\t---------- = B")
+        print(f"\tK * Tₒ * {f}\n")
 
         print(f"B = {b}")
 
