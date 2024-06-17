@@ -1,6 +1,7 @@
 # tab1_content.py
 #TODO Finish Conversions
 import tkinter as tk
+from tkinter import *
 from tkinter import ttk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -88,13 +89,13 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
 
     # Check if input is valid for calculation
     input = []
-    input.append(pt)
-    input.append(gt)
-    input.append(gr)
-    input.append(f)
-    input.append(rcs)
-    input.append(r)
-    input.append(pr)
+    input.append(pt.get())
+    input.append(gt.get())
+    input.append(gr.get())
+    input.append(f.get())
+    input.append(rcs.get())
+    input.append(r.get())
+    input.append(pr.get())
     if validateInput(input) :
         return
     else : 
@@ -103,16 +104,16 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
 
 
     # Calculations Start
-    if not pr:
+    if not pr.get():
 
         print("Solve for Pᵣ\n")
 
-        pt = float(UnitConversion.convert_to_dBW(pt, pt_unit))
-        gt = float(gt)
-        gr = float(gr)
-        f = float(UnitConversion.convert_to_GHz(f, f_unit))
-        rcs = float(UnitConversion.convert_to_m2(rcs, rcs_unit))
-        r = float(UnitConversion.convert_to_dBW(r, r_unit))
+        pt = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
+        gt = float(gt.get())
+        gr = float(gr.get())
+        f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
+        rcs = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
+        r = float(UnitConversion.convert_to_dBW(r.get(), r_unit))
 
         print("\t Pₜ * Gₜ * Gᵣ * λ² * σ")
         print("\t---------------------- = Pᵣ")
@@ -123,26 +124,29 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
         num = pt * gt * gr * pow(w, 2) * rcs
         den = pow((4 * 3.14159265), 3) * pow(r, 4)
 
-        pr = round(num/den, 3)
+        pr_f = round(num/den, 3)
 
         print(f"\t  {pt} * {gt} * {gr} * (C/{f})² * {rcs}")
-        print(f"\t------------------------------------------ = {pr}")
+        print(f"\t------------------------------------------ = {pr_f}")
         print(f"\t\t   (4π)³ * {r}⁴\n")
 
-        print(f"Pᵣ = {pr}")
+        print(f"Pᵣ = {pr_f}")
 
         print("\n---------\n")
 
-    elif not pt:
+        pr.delete(0, tk.END)
+        pr.insert(0, pr_f)
+
+    elif not pt.get():
         
         print("Solve for Pₜ\n")
 
-        gt = float(gt)
-        gr = float(gr)
-        f = float(UnitConversion.convert_to_GHz(f, f_unit))
-        rcs = float(UnitConversion.convert_to_m2(rcs, rcs_unit))
-        r = float(UnitConversion.convert_to_NMI(r, r_unit))
-        pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
+        gt = float(gt.get())
+        gr = float(gr.get())
+        f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
+        rcs = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
+        r = float(UnitConversion.convert_to_NMI(r.get(), r_unit))
+        pr = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
 
         print("\t Pᵣ * (4π)³ * R⁴")
         print("\t----------------- = Pₜ")
@@ -153,26 +157,29 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
         num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
         den = gt * gr * pow(w, 2) * rcs
 
-        pt = round(num/den, 3)
+        pt_f = round(num/den, 3)
 
         print(f"\t\t{pr} * (4π)³ * {r}⁴")
-        print(f"\t--------------------------------  = {pt}")
+        print(f"\t--------------------------------  = {pt_f}")
         print(f"\t {gt} * {gr} * {w}² * {rcs}\n")
 
-        print(f"Pₜ = {pt}")
+        print(f"Pₜ = {pt_f}")
 
         print("\n---------\n")
 
-    elif not gt:
+        pt.delete(0, tk.END)
+        pt.insert(0, pt_f)
+
+    elif not gt.get():
 
         print("Solve for Gₜ\n")
 
-        pt = float(UnitConversion.convert_to_dBW(pt, pt_unit))
-        gr = float(gr)
-        f = float(UnitConversion.convert_to_GHz(f, f_unit))
-        rcs = float(UnitConversion.convert_to_m2(rcs, rcs_unit))
-        r = float(UnitConversion.convert_to_NMI(r, r_unit))
-        pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
+        pt = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
+        gr = float(gr.get())
+        f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
+        rcs = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
+        r = float(UnitConversion.convert_to_NMI(r.get(), r_unit))
+        pr = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
 
         print("\t Pᵣ * (4π)³ * R⁴")
         print("\t----------------- = Gₜ")
@@ -183,26 +190,29 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
         num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
         den = pt * gr * pow(w, 2) * rcs
 
-        gt = round(num/den, 3)
+        gt_f = round(num/den, 3)
 
         print(f"\t\t{pr} * (4π)³ * {r}⁴")
-        print(f"\t--------------------------------  = {gt}")
+        print(f"\t--------------------------------  = {gt_f}")
         print(f"\t {pt} * {gr} * {w}² * {rcs}\n")
 
-        print(f"Gₜ = {gt}")
+        print(f"Gₜ = {gt_f}")
 
         print("\n---------\n")
 
-    elif not gr:
+        gt.delete(0, tk.END)
+        gt.insert(0, gt_f)
+
+    elif not gr.get():
 
         print("Solve for Gᵣ\n")
 
-        pt = float(UnitConversion.convert_to_dBW(pt, pt_unit))
-        gt = float(gt)
-        f = float(UnitConversion.convert_to_GHz(f, f_unit))
-        rcs = float(UnitConversion.convert_to_m2(rcs, rcs_unit))
-        r = float(UnitConversion.convert_to_NMI(r, r_unit))
-        pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
+        pt = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
+        gt = float(gt.get())
+        f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
+        rcs = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
+        r = float(UnitConversion.convert_to_NMI(r.get(), r_unit))
+        pr = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
 
         print("\t Pᵣ * (4π)³ * R⁴")
         print("\t----------------- = Gᵣ")
@@ -213,26 +223,29 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
         num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
         den = pt * gt * pow(w, 2) * rcs
 
-        gr = round(num/den, 3)
+        gr_f = round(num/den, 3)
 
         print(f"\t\t{pr} * (4π)³ * {r}⁴")
-        print(f"\t--------------------------------  = {gr}")
+        print(f"\t--------------------------------  = {gr_f}")
         print(f"\t {pt} * {gt} * {w}² * {rcs}\n")
 
-        print(f"Gᵣ = {gr}")
+        print(f"Gᵣ = {gr_f}")
 
         print("\n---------\n")
 
-    elif not f:
+        gr.delete(0, tk.END)
+        gr.insert(0, gr_f)
+
+    elif not f.get():
 
         print("Solve for λ and ƒ\n")
 
-        pt = float(UnitConversion.convert_to_dBW(pt, pt_unit))
-        gt = float(gt)
-        gr = float(gr)
-        rcs = float(UnitConversion.convert_to_m2(rcs, rcs_unit))
-        r = float(UnitConversion.convert_to_NMI(r, r_unit))
-        pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
+        pt = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
+        gt = float(gt.get())
+        gr = float(gr.get())
+        rcs = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
+        r = float(UnitConversion.convert_to_NMI(r.get(), r_unit))
+        pr = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
 
         print("\t Pᵣ * (4π)³ * R⁴")
         print("\t----------------- = λ²")
@@ -243,27 +256,30 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
 
         w = round(pow(num/den, 0.5), 3)
 
-        f = round((3 * pow(10, 8))/w, 3)
+        f_f = round((3 * pow(10, 8))/w, 3)
 
         print(f"\t\t{pr} * (4π)³ * {r}⁴")
         print(f"\t--------------------------------  = {w}²")
         print(f"\t {pt} * {gt} * {gr} * {rcs}\n")
 
         print(f"λ = {w}")
-        print(f"ƒ = {f}")
+        print(f"ƒ = {f_f}")
 
         print("\n---------\n")
 
-    elif not rcs:
+        f.delete(0, tk.END)
+        f.insert(0, f_f)
+
+    elif not rcs.get():
 
         print("Solve for σ\n")
 
-        pt = float(UnitConversion.convert_to_dBW(pt, pt_unit))
-        gt = float(gt)
-        gr = float(gr)
-        f = float(UnitConversion.convert_to_GHz(f, f_unit))
-        r = float(UnitConversion.convert_to_NMI(r, r_unit))
-        pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
+        pt = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
+        gt = float(gt.get())
+        gr = float(gr.get())
+        f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
+        r = float(UnitConversion.convert_to_NMI(r.get(), r_unit))
+        pr = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
 
         print("\t Pᵣ * (4π)³ * R⁴")
         print("\t----------------- = σ")
@@ -274,26 +290,29 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
         num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
         den = pt * gt * gr * pow(w, 2)
 
-        rcs = round(num/den, 3)
+        rcs_f = round(num/den, 3)
 
         print(f"\t\t{pr} * (4π)³ * {r}⁴")
-        print(f"\t--------------------------------  = {rcs}")
+        print(f"\t--------------------------------  = {rcs_f}")
         print(f"\t {pt} * {gt} * {gr} * {w}²\n")
 
-        print(f"σ = {rcs}")
+        print(f"σ = {rcs_f}")
 
         print("\n---------\n")
 
-    elif not r:
+        rcs.delete(0, tk.END)
+        rcs.insert(0, rcs_f)
+
+    elif not r.get():
 
         print("Solve for R\n")
 
-        pt = float(UnitConversion.convert_to_dBW(pt, pt_unit))
-        gt = float(gt)
-        gr = float(gr)
-        f = float(UnitConversion.convert_to_GHz(f, f_unit))
-        rcs = float(UnitConversion.convert_to_m2(rcs, rcs_unit))
-        pr = float(UnitConversion.convert_to_dBW(pr, pr_unit))
+        pt = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
+        gt = float(gt.get())
+        gr = float(gr.get())
+        f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
+        rcs = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
+        pr = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
 
         print("\t Pₜ * Gₜ * Gᵣ * λ² * σ")
         print("\t---------------------- = R⁴")
@@ -304,15 +323,18 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
         num = pt * gt * gr * pow(w, 2) * rcs
         den = pow((4 * 3.14159265), 3) * pr
 
-        r = round(pow(num/den, 0.25), 3)
+        r_f = round(pow(num/den, 0.25), 3)
 
         print(f"\t  {pt} * {gt} * {gr} * (C/{f})² * {rcs}")
-        print(f"\t------------------------------------------ = {r}⁴")
+        print(f"\t------------------------------------------ = {r_f}⁴")
         print(f"\t\t   (4π)³ * {pr}\n")
 
-        print(f"R = {r}")
+        print(f"R = {r_f}")
 
         print("\n---------\n")
+
+        r.delete(0, tk.END)
+        r.insert(0, r_f)
 
     else:
         print("Error")
@@ -380,9 +402,9 @@ def create_RP_tab_content(tab1):
     pr_unit_menu.grid(row=7, column=2, padx=10, pady=10)
 
     # Calc button
-    btn_plot = tk.Button(tab1, text="Calc", command=lambda: calculate(pt_entry.get(), gt_entry.get(), gr_entry.get(), f_entry.get(), rcs_entry.get(), 
-                                                                      r_entry.get(), pr_entry.get(), pt_unit.get(), f_unit.get(), rcs_unit.get(), 
-                                                                      r_unit.get(), pr_unit.get()), font=default_font, width=7, bg='darkgray')
+    btn_plot = tk.Button(tab1, text="Calc", command=lambda: calculate(pt_entry, gt_entry, gr_entry, f_entry, rcs_entry, r_entry, pr_entry, 
+                                                                      pt_unit.get(), f_unit.get(), rcs_unit.get(), r_unit.get(), pr_unit.get()), 
+                                                                      font=default_font, width=7, bg='darkgray')
     btn_plot.grid(row=7, column=3, padx=10, pady=10)
 
     # Insert image

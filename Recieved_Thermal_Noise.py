@@ -5,6 +5,7 @@ from tkinter import ttk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from PIL import Image, ImageTk
+import UnitConversion
 
 
 
@@ -81,37 +82,40 @@ def calculate_SNT(ts, b, b_unit, pn, pn_unit):
     
     # Check if input is valid for calculation
     input = []
-    input.append(ts)
-    input.append(b)
-    input.append(pn)
+    input.append(ts.get())
+    input.append(b.get())
+    input.append(pn.get())
     if validateInput(input) :
         return
     else : 
         pass
 
-    if not pn:
+    if not pn.get():
 
         print("Solve for Pₙ\n")
 
-        ts = float(ts)
-        b = float(b)
+        ts = float(ts.get())
+        b = float(b.get())
 
         print("\tK * Tₛ * B = Pₙ\n")
 
-        pn = round(ts * pow(1.38, -23) * b, 3)
+        pn_f = round(ts * pow(1.38, -23) * b, 3)
 
-        print(f"\tK * {ts} * {b} = {pn}\n")
+        print(f"\tK * {ts} * {b} = {pn_f}\n")
 
-        print(f"Pₙ = {pn}")
+        print(f"Pₙ = {pn_f}")
 
         print("\n---------\n")
 
-    elif not ts:
+        pn.delete(0, tk.END)
+        pn.insert(0, pn_f)
+
+    elif not ts.get():
 
         print("Solve for Tₛ\n")
 
-        b = float(b)
-        pn = float(pn)
+        b = float(b.get())
+        pn = float(pn.get())
 
         print("\t  Pₙ")
         print("\t------ = Tₛ")
@@ -120,22 +124,25 @@ def calculate_SNT(ts, b, b_unit, pn, pn_unit):
         num = pn
         den = pow(1.38, -23) * b
 
-        ts = round(num/den, 3)
+        ts_f = round(num/den, 3)
 
         print(f"\t  {pn}")
-        print(f"\t------ = {ts}")
+        print(f"\t------ = {ts_f}")
         print(f"\tk * {b}\n")
 
-        print(f"Tₛ = {ts}")
+        print(f"Tₛ = {ts_f}")
 
         print("\n---------\n")
 
-    elif not b:
+        ts.delete(0, tk.END)
+        ts.insert(0, ts_f)
+
+    elif not b.get():
 
         print("Solve for B\n")
 
-        ts = float(ts)
-        pn = float(pn)
+        ts = float(ts.get())
+        pn = float(pn.get())
 
         print("\t  Pₙ")
         print("\t------ = B")
@@ -144,15 +151,18 @@ def calculate_SNT(ts, b, b_unit, pn, pn_unit):
         num = pn
         den = pow(1.38, -23) * ts
 
-        b = round(num/den, 3)
+        b_f = round(num/den, 3)
 
         print(f"\t  {pn}")
-        print(f"\t------ = {b}")
+        print(f"\t------ = {b_f}")
         print(f"\tk * {ts}\n")
 
-        print(f"B = {b}")
+        print(f"B = {b_f}")
 
         print("\n---------\n")
+
+        b.delete(0, tk.END)
+        b.insert(0, b_f)
 
     else:
         print("Error")
@@ -165,37 +175,40 @@ def calculate_ST(f, b, b_unit, pn, pn_unit):
     
     # Check if input is valid for calculation
     input = []
-    input.append(f)
-    input.append(b)
-    input.append(pn)
+    input.append(f.get())
+    input.append(b.get())
+    input.append(pn.get())
     if validateInput(input) :
         return
     else : 
         pass
 
-    if not pn:
+    if not pn.get():
 
         print("Solve for Pₙ\n")
 
-        f = float(f)
-        b = float(b)
+        f = float(f.get())
+        b = float(b.get())
 
         print("\tK * Tₒ * F * B = Pₙ\n")
 
-        pn = round(pow(1.38, -23) * 290 * f * b, 3)
+        pn_f = round(pow(1.38, -23) * 290 * f * b, 3)
 
-        print(f"\tK * Tₒ * {f} * {b} = {pn}\n")
+        print(f"\tK * Tₒ * {f} * {b} = {pn_f}\n")
 
-        print(f"Pₙ = {pn}")
+        print(f"Pₙ = {pn_f}")
 
         print("\n---------\n")
 
-    elif not f:
+        pn.delete(0, tk.END)
+        pn.insert(0, pn_f)
+
+    elif not f.get():
 
         print("Solve for F\n")
 
-        b = float(b)
-        pn = float(pn)
+        b = float(b.get())
+        pn = float(pn.get())
 
         print("\t    Pₙ")
         print("\t---------- = F")
@@ -204,22 +217,25 @@ def calculate_ST(f, b, b_unit, pn, pn_unit):
         num = pn
         den = pow(1.38, -23) * 290 * b
 
-        f = round(num/den, 3)
+        f_f = round(num/den, 3)
 
         print(f"\t    {pn}")
-        print(f"\t---------- = F")
+        print(f"\t---------- = {f_f}")
         print(f"\tK * Tₒ * {b}\n")
 
-        print(f"F = {f}")
+        print(f"F = {f_f}")
 
         print("\n---------\n")
 
-    elif not b:
+        f.delete(0, tk.END)
+        f.insert(0, f_f)
+
+    elif not b.get():
 
         print("Solve for B\n")
 
-        f = float(f)
-        pn = float(pn)
+        f = float(f.get())
+        pn = float(pn.get())
 
         print("\t    Pₙ")
         print("\t---------- = B")
@@ -228,15 +244,18 @@ def calculate_ST(f, b, b_unit, pn, pn_unit):
         num = pn
         den = pow(1.38, -23) * 290 * f
 
-        b = round(num/den, 3)
+        b_f = round(num/den, 3)
 
         print(f"\t    {pn}")
-        print(f"\t---------- = B")
+        print(f"\t---------- = {b_f}")
         print(f"\tK * Tₒ * {f}\n")
 
-        print(f"B = {b}")
+        print(f"B = {b_f}")
 
         print("\n---------\n")
+
+        b.delete(0, tk.END)
+        b.insert(0, b_f)
 
     else:
         print("Error")
@@ -283,11 +302,11 @@ def create_RTN_tab_content(tab2):
     pn_unit_menu.grid(row=6, column=2, padx=10, pady=10)
 
     # Plot button System Noise Temperature
-    ts_btn_plot = tk.Button(tab2, text="Calc SNT", command=lambda: calculate_SNT(ts_entry.get(), b_entry.get(), b_unit.get(), pn_entry.get(), pn_unit.get()), font=default_font, width=7, bg='darkgray')
+    ts_btn_plot = tk.Button(tab2, text="Calc SNT", command=lambda: calculate_SNT(ts_entry, b_entry, b_unit.get(), pn_entry, pn_unit.get()), font=default_font, width=7, bg='darkgray')
     ts_btn_plot.grid(row=4, column=3, padx=10, pady=10)
 
     # Plot button Standard Temperature
-    to_btn_plot = tk.Button(tab2, text="Calc ST", command=lambda: calculate_ST(f_entry.get(), b_entry.get(), b_unit.get(), pn_entry.get(), pn_unit.get()), font=default_font, width=7, bg='darkgray')
+    to_btn_plot = tk.Button(tab2, text="Calc ST", command=lambda: calculate_ST(f_entry, b_entry, b_unit.get(), pn_entry, pn_unit.get()), font=default_font, width=7, bg='darkgray')
     to_btn_plot.grid(row=5, column=3, padx=10, pady=10)
 
     # Insert image

@@ -86,15 +86,15 @@ def calculate(pj, gj, grj, f, rjr, ltj, la, lr, prj, pj_unit, rjr_unit, prj_unit
 
     # Check if input is valid for calculation
     input = []
-    input.append(pj)
-    input.append(gj)
-    input.append(grj)
-    input.append(f)
-    input.append(rjr)
-    input.append(ltj)
-    input.append(la)
-    input.append(lr)
-    input.append(prj)
+    input.append(pj.get())
+    input.append(gj.get())
+    input.append(grj.get())
+    input.append(f.get())
+    input.append(rjr.get())
+    input.append(ltj.get())
+    input.append(la.get())
+    input.append(lr.get())
+    input.append(prj.get())
     if validateInput(input) :
         return
     else : 
@@ -103,18 +103,18 @@ def calculate(pj, gj, grj, f, rjr, ltj, la, lr, prj, pj_unit, rjr_unit, prj_unit
 
 
     # Calculations Start
-    if not prj:
+    if not prj.get():
 
         print("Solve for Pᵣⱼ\n")
 
-        pj = float(pj)
-        gj = float(gj)
-        grj = float(grj)
-        f = float(f)
-        rjr = float(rjr)
-        ltj = float(ltj)
-        la = float(la)
-        lr = float(lr)
+        pj = float(pj.get())
+        gj = float(gj.get())
+        grj = float(grj.get())
+        f = float(f.get())
+        rjr = float(rjr.get())
+        ltj = float(ltj.get())
+        la = float(la.get())
+        lr = float(lr.get())
 
         print("\t     Pⱼ * Gⱼ * Gᵣⱼ * λ²")
         print("\t----------------------------- = Pᵣⱼ")
@@ -125,28 +125,31 @@ def calculate(pj, gj, grj, f, rjr, ltj, la, lr, prj, pj_unit, rjr_unit, prj_unit
         num = pj * gj * grj * pow(w, 2)
         den = pow((4 * 3.14159265), 3) * pow(rjr, 2) * ltj * la * lr
 
-        prj = round(num/den, 3)
+        prj_f = round(num/den, 3)
 
         print(f"\t   {pj} * {gj} * {grj} * (C/{f})²")
-        print(f"\t------------------------------------- = {prj}")
+        print(f"\t------------------------------------- = {prj_f}")
         print(f"\t (4π)³ * {rjr}² * {ltj} * {la} * {lr}\n")
 
-        print(f"Pᵣⱼ = {prj}")
+        print(f"Pᵣⱼ = {prj_f}")
 
         print("\n---------\n")
 
-    elif not pj:
+        prj.delete(0, tk.END)
+        prj.insert(0, prj_f)
+
+    elif not pj.get():
 
         print("Solve for Pⱼ\n")
 
-        gj = float(gj)
-        grj = float(grj)
-        f = float(f)
-        rjr = float(rjr)
-        ltj = float(ltj)
-        la = float(la)
-        lr = float(lr)
-        prj = float(prj)
+        gj = float(gj.get())
+        grj = float(grj.get())
+        f = float(f.get())
+        rjr = float(rjr.get())
+        ltj = float(ltj.get())
+        la = float(la.get())
+        lr = float(lr.get())
+        prj = float(prj.get())
 
         print("\tPᵣⱼ * (4π)³ * Rⱼᵣ² * Lₜⱼ * Lₐ * Lᵣ")
         print("\t---------------------------------- = Pⱼ")
@@ -157,28 +160,31 @@ def calculate(pj, gj, grj, f, rjr, ltj, la, lr, prj, pj_unit, rjr_unit, prj_unit
         num = prj * pow((4 * 3.14159265), 3) * pow(rjr, 2) * ltj * la * lr
         den = gj * grj * pow(w, 2)
 
-        pj = round(num/den, 3)
+        pj_f = round(num/den, 3)
 
         print(f"\t {prj} * (4π)³ * {rjr}² * {ltj} * {la} * {lr}")
-        print(f"\t--------------------------------------------- = {pj}")
+        print(f"\t--------------------------------------------- = {pj_f}")
         print(f"\t        {gj} * {grj} * (C/{f})²\n")
 
-        print(f"Pⱼ = {pj}")
+        print(f"Pⱼ = {pj_f}")
 
         print("\n---------\n")
+
+        pj.delete(0, tk.END)
+        pj.insert(0, pj_f)
     
-    elif not gj:
+    elif not gj.get():
 
         print("Solve for Gⱼ\n")
 
-        pj = float(pj)
-        grj = float(grj)
-        f = float(f)
-        rjr = float(rjr)
-        ltj = float(ltj)
-        la = float(la)
-        lr = float(lr)
-        prj = float(prj)
+        pj = float(pj.get())
+        grj = float(grj.get())
+        f = float(f.get())
+        rjr = float(rjr.get())
+        ltj = float(ltj.get())
+        la = float(la.get())
+        lr = float(lr.get())
+        prj = float(prj.get())
 
         print("\tPᵣⱼ * (4π)³ * Rⱼᵣ² * Lₜⱼ * Lₐ * Lᵣ")
         print("\t---------------------------------- = Gⱼ")
@@ -189,28 +195,31 @@ def calculate(pj, gj, grj, f, rjr, ltj, la, lr, prj, pj_unit, rjr_unit, prj_unit
         num = prj * pow((4 * 3.14159265), 3) * pow(rjr, 2) * ltj * la * lr
         den = pj * grj * pow(w, 2)
 
-        gj = round(num/den, 3)
+        gj_f = round(num/den, 3)
 
         print(f"\t {prj} * (4π)³ * {rjr}² * {ltj} * {la} * {lr}")
-        print(f"\t--------------------------------------------- = {gj}")
+        print(f"\t--------------------------------------------- = {gj_f}")
         print(f"\t        {pj} * {grj} * (C/{f})²\n")
 
-        print(f"Gⱼ = {gj}")
+        print(f"Gⱼ = {gj_f}")
 
         print("\n---------\n")
+
+        gj.delete(0, tk.END)
+        gj.insert(0, gj_f)
     
-    elif not grj:
+    elif not grj.get():
 
         print("Solve for Gᵣⱼ\n")
 
-        pj = float(pj)
-        gj = float(gj)
-        f = float(f)
-        rjr = float(rjr)
-        ltj = float(ltj)
-        la = float(la)
-        lr = float(lr)
-        prj = float(prj)
+        pj = float(pj.get())
+        gj = float(gj.get())
+        f = float(f.get())
+        rjr = float(rjr.get())
+        ltj = float(ltj.get())
+        la = float(la.get())
+        lr = float(lr.get())
+        prj = float(prj.get())
 
         print("\tPᵣⱼ * (4π)³ * Rⱼᵣ² * Lₜⱼ * Lₐ * Lᵣ")
         print("\t---------------------------------- = Gᵣⱼ")
@@ -221,28 +230,31 @@ def calculate(pj, gj, grj, f, rjr, ltj, la, lr, prj, pj_unit, rjr_unit, prj_unit
         num = prj * pow((4 * 3.14159265), 3) * pow(rjr, 2) * ltj * la * lr
         den = pj * gj * pow(w, 2)
 
-        grj = round(num/den, 3)
+        grj_f = round(num/den, 3)
 
         print(f"\t {prj} * (4π)³ * {rjr}² * {ltj} * {la} * {lr}")
-        print(f"\t--------------------------------------------- = {grj}")
+        print(f"\t--------------------------------------------- = {grj_f}")
         print(f"\t        {pj} * {gj} * (C/{f})²\n")
 
-        print(f"Gᵣⱼ = {grj}")
+        print(f"Gᵣⱼ = {grj_f}")
 
         print("\n---------\n")
+
+        grj.delete(0, tk.END)
+        grj.insert(0, grj_f)
     
-    elif not f:
+    elif not f.get():
 
         print("Solve for λ and ƒ\n")
 
-        pj = float(pj)
-        gj = float(gj)
-        grj = float(grj)
-        rjr = float(rjr)
-        ltj = float(ltj)
-        la = float(la)
-        lr = float(lr)
-        prj = float(prj)
+        pj = float(pj.get())
+        gj = float(gj.get())
+        grj = float(grj.get())
+        rjr = float(rjr.get())
+        ltj = float(ltj.get())
+        la = float(la.get())
+        lr = float(lr.get())
+        prj = float(prj.get())
 
         print("\tPᵣⱼ * (4π)³ * Rⱼᵣ² * Lₜⱼ * Lₐ * Lᵣ")
         print("\t---------------------------------- = λ²")
@@ -253,29 +265,32 @@ def calculate(pj, gj, grj, f, rjr, ltj, la, lr, prj, pj_unit, rjr_unit, prj_unit
 
         w = round(pow(num/den, 0.5), 3)
 
-        f = round((3 * pow(10, 8))/w, 3)
+        f_f = round((3 * pow(10, 8))/w, 3)
 
         print(f"\t {prj} * (4π)³ * {rjr}² * {ltj} * {la} * {lr}")
         print(f"\t--------------------------------------------- = {w}²")
         print(f"\t        {pj} * {gj} * {grj}\n")
 
         print(f"λ = {w}")
-        print(f"ƒ = {f}")
+        print(f"ƒ = {f_f}")
 
         print("\n---------\n")
+
+        f.delete(0, tk.END)
+        f.insert(0, f_f)
     
-    elif not rjr:
+    elif not rjr.get():
 
         print("Solve for Rⱼᵣ\n")
 
-        pj = float(pj)
-        gj = float(gj)
-        grj = float(grj)
-        f = float(f)
-        ltj = float(ltj)
-        la = float(la)
-        lr = float(lr)
-        prj = float(prj)
+        pj = float(pj.get())
+        gj = float(gj.get())
+        grj = float(grj.get())
+        f = float(f.get())
+        ltj = float(ltj.get())
+        la = float(la.get())
+        lr = float(lr.get())
+        prj = float(prj.get())
 
         print("\t     Pⱼ * Gⱼ * Gᵣⱼ * λ²")
         print("\t----------------------------- = Rⱼᵣ²")
@@ -286,28 +301,31 @@ def calculate(pj, gj, grj, f, rjr, ltj, la, lr, prj, pj_unit, rjr_unit, prj_unit
         num = pj * gj * grj * pow(w, 2)
         den = prj * pow((4 * 3.14159265), 3) * ltj * la * lr
 
-        rjr = round(pow(num/den, 0.5), 3)
+        rjr_f = round(pow(num/den, 0.5), 3)
 
         print(f"\t   {pj} * {gj} * {grj} * (C/{f})²")
-        print(f"\t------------------------------------- = {rjr}²")
+        print(f"\t------------------------------------- = {rjr_f}²")
         print(f"\t {prj} * (4π)³ * {ltj} * {la} * {lr}\n")
 
-        print(f"Rⱼᵣ = {rjr}")
+        print(f"Rⱼᵣ = {rjr_f}")
 
         print("\n---------\n")
+
+        rjr.delete(0, tk.END)
+        rjr.insert(0, rjr_f)
     
-    elif not ltj:
+    elif not ltj.get():
 
         print("Solve for Lₜⱼ\n")
 
-        pj = float(pj)
-        gj = float(gj)
-        grj = float(grj)
-        f = float(f)
-        rjr = float(rjr)
-        la = float(la)
-        lr = float(lr)
-        prj = float(prj)
+        pj = float(pj.get())
+        gj = float(gj.get())
+        grj = float(grj.get())
+        f = float(f.get())
+        rjr = float(rjr.get())
+        la = float(la.get())
+        lr = float(lr.get())
+        prj = float(prj.get())
 
         print("\t     Pⱼ * Gⱼ * Gᵣⱼ * λ²")
         print("\t----------------------------- = Lₜⱼ")
@@ -318,28 +336,31 @@ def calculate(pj, gj, grj, f, rjr, ltj, la, lr, prj, pj_unit, rjr_unit, prj_unit
         num = pj * gj * grj * pow(w, 2)
         den = prj * pow((4 * 3.14159265), 3) * pow(rjr, 2) * la * lr
 
-        ltj = round(num/den, 3)
+        ltj_f = round(num/den, 3)
 
         print(f"\t   {pj} * {gj} * {grj} * (C/{f})²")
-        print(f"\t------------------------------------- = {ltj}")
+        print(f"\t------------------------------------- = {ltj_f}")
         print(f"\t {prj} * (4π)³ * {rjr}² * {la} * {lr}\n")
 
-        print(f"Lₜⱼ = {ltj}")
+        print(f"Lₜⱼ = {ltj_f}")
 
         print("\n---------\n")
+
+        ltj.delete(0, tk.END)
+        ltj.insert(0, ltj_f)
     
-    elif not la:
+    elif not la.get():
 
         print("Solve for Lₐ\n")
 
-        pj = float(pj)
-        gj = float(gj)
-        grj = float(grj)
-        f = float(f)
-        rjr = float(rjr)
-        ltj = float(ltj)
-        lr = float(lr)
-        prj = float(prj)
+        pj = float(pj.get())
+        gj = float(gj.get())
+        grj = float(grj.get())
+        f = float(f.get())
+        rjr = float(rjr.get())
+        ltj = float(ltj.get())
+        lr = float(lr.get())
+        prj = float(prj.get())
 
         print("\t     Pⱼ * Gⱼ * Gᵣⱼ * λ²")
         print("\t----------------------------- = Lₐ")
@@ -350,28 +371,31 @@ def calculate(pj, gj, grj, f, rjr, ltj, la, lr, prj, pj_unit, rjr_unit, prj_unit
         num = pj * gj * grj * pow(w, 2)
         den = prj * pow((4 * 3.14159265), 3) * pow(rjr, 2) * ltj * lr
 
-        la = num/den
+        la_f = round(num/den, 3)
 
         print(f"\t   {pj} * {gj} * {grj} * (C/{f})²")
-        print(f"\t------------------------------------- = {la}")
+        print(f"\t------------------------------------- = {la_f}")
         print(f"\t {prj} * (4π)³ * {rjr}² * {ltj} * {lr}\n")
 
-        print(f"Lₐ = {la}")
+        print(f"Lₐ = {la_f}")
 
         print("\n---------\n")
+
+        la.delete(0, tk.END)
+        la.insert(0, la_f)
     
-    elif not lr:
+    elif not lr.get():
 
         print("Solve for lr\n")
 
-        pj = float(pj)
-        gj = float(gj)
-        grj = float(grj)
-        f = float(f)
-        rjr = float(rjr)
-        ltj = float(ltj)
-        la = float(la)
-        prj = float(prj)
+        pj = float(pj.get())
+        gj = float(gj.get())
+        grj = float(grj.get())
+        f = float(f.get())
+        rjr = float(rjr.get())
+        ltj = float(ltj.get())
+        la = float(la.get())
+        prj = float(prj.get())
 
         print("\t     Pⱼ * Gⱼ * Gᵣⱼ * λ²")
         print("\t------------------------------ = Lᵣ")
@@ -382,15 +406,18 @@ def calculate(pj, gj, grj, f, rjr, ltj, la, lr, prj, pj_unit, rjr_unit, prj_unit
         num = pj * gj * grj * pow(w, 2)
         den = prj * pow((4 * 3.14159265), 3) * pow(rjr, 2) * ltj * la
 
-        lr = round(num/den, 3)
+        lr_f = round(num/den, 3)
 
         print(f"\t   {pj} * {gj} * {grj} * (C/{f})²")
-        print(f"\t------------------------------------- = {lr}")
+        print(f"\t------------------------------------- = {lr_f}")
         print(f"\t {prj} * (4π)³ * {rjr}² * {ltj} * {la}\n")
 
-        print(f"Lᵣ = {lr}")
+        print(f"Lᵣ = {lr_f}")
 
         print("\n---------\n")
+
+        lr.delete(0, tk.END)
+        lr.insert(0, lr_f)
 
     else :
         print("Error")
@@ -463,8 +490,8 @@ def create_JOWL_tab_content(tab5):
     prj_unit_menu.grid(row=9, column=2, padx=10, pady=10)
 
     # Plot button
-    btn_plot = tk.Button(tab5, text="Calc", command=lambda: calculate(pj_entry.get(), gj_entry.get(), grj_entry.get(), f_entry.get(), rjr_entry.get(), 
-                                                                      ltj_entry.get(), la_entry.get(), lr_entry.get(), prj_entry.get(), pj_unit.get(),
+    btn_plot = tk.Button(tab5, text="Calc", command=lambda: calculate(pj_entry, gj_entry, grj_entry, f_entry, rjr_entry, 
+                                                                      ltj_entry, la_entry, lr_entry, prj_entry, pj_unit.get(),
                                                                       rjr_unit.get(), prj_unit.get()), font=default_font, width=7, bg='darkgray')
     btn_plot.grid(row=9, column=3, padx=10, pady=10)
 
