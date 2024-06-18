@@ -20,6 +20,14 @@ units_t = ["k°", "C°", "f°"]
 
 #!######## Units ########## Units ########## Units ########## Units ############
 #/////////////////////////////////////////////////////////////////////////////
+########## Init ########## Init ########## Init ########## Init ############
+
+ts_f = 0.0
+b_f = 0.0
+pn_f = 0.0
+
+#!######## Init ########## Init ########## Init ########## Init ############
+#///////////////////////////////////////////////////////////////////////////
 ########## Calc ########## Calc ########## Calc ########## Calc ############
 
 def validateInput(input):
@@ -94,14 +102,14 @@ def calculate_SNT(ts, b, b_unit, pn, pn_unit):
 
         print("Solve for Pₙ\n")
 
-        ts = float(ts.get())
-        b = float(b.get())
+        ts_f = float(ts.get())
+        b_f = float(b.get())
 
         print("\tK * Tₛ * B = Pₙ\n")
 
-        pn_f = round(ts * pow(1.38, -23) * b, 3)
+        pn_f = round(ts_f * pow(1.38, -23) * b_f, 3)
 
-        print(f"\tK * {ts} * {b} = {pn_f}\n")
+        print(f"\tK * {ts_f} * {b_f} = {pn_f}\n")
 
         print(f"Pₙ = {pn_f}")
 
@@ -114,21 +122,21 @@ def calculate_SNT(ts, b, b_unit, pn, pn_unit):
 
         print("Solve for Tₛ\n")
 
-        b = float(b.get())
-        pn = float(pn.get())
+        b_f = float(b.get())
+        pn_f = float(pn.get())
 
         print("\t  Pₙ")
         print("\t------ = Tₛ")
         print("\tK * B\n")
 
-        num = pn
-        den = pow(1.38, -23) * b
+        num = pn_f
+        den = pow(1.38, -23) * b_f
 
         ts_f = round(num/den, 3)
 
-        print(f"\t  {pn}")
+        print(f"\t  {pn_f}")
         print(f"\t------ = {ts_f}")
-        print(f"\tk * {b}\n")
+        print(f"\tk * {b_f}\n")
 
         print(f"Tₛ = {ts_f}")
 
@@ -141,21 +149,21 @@ def calculate_SNT(ts, b, b_unit, pn, pn_unit):
 
         print("Solve for B\n")
 
-        ts = float(ts.get())
-        pn = float(pn.get())
+        ts_f = float(ts.get())
+        pn_f = float(pn.get())
 
         print("\t  Pₙ")
         print("\t------ = B")
         print("\tK * Tₛ\n")
 
-        num = pn
-        den = pow(1.38, -23) * ts
+        num = pn_f
+        den = pow(1.38, -23) * ts_f
 
         b_f = round(num/den, 3)
 
-        print(f"\t  {pn}")
+        print(f"\t  {pn_f}")
         print(f"\t------ = {b_f}")
-        print(f"\tk * {ts}\n")
+        print(f"\tk * {ts_f}\n")
 
         print(f"B = {b_f}")
 
@@ -187,14 +195,14 @@ def calculate_ST(f, b, b_unit, pn, pn_unit):
 
         print("Solve for Pₙ\n")
 
-        f = float(f.get())
-        b = float(b.get())
+        f_f = float(f.get())
+        b_f = float(b.get())
 
         print("\tK * Tₒ * F * B = Pₙ\n")
 
-        pn_f = round(pow(1.38, -23) * 290 * f * b, 3)
+        pn_f = round(pow(1.38, -23) * 290 * f_f * b_f, 3)
 
-        print(f"\tK * Tₒ * {f} * {b} = {pn_f}\n")
+        print(f"\tK * Tₒ * {f_f} * {b_f} = {pn_f}\n")
 
         print(f"Pₙ = {pn_f}")
 
@@ -207,21 +215,21 @@ def calculate_ST(f, b, b_unit, pn, pn_unit):
 
         print("Solve for F\n")
 
-        b = float(b.get())
-        pn = float(pn.get())
+        b_f = float(b.get())
+        pn_f = float(pn.get())
 
         print("\t    Pₙ")
         print("\t---------- = F")
         print("\tK * Tₒ * B\n")
 
-        num = pn
-        den = pow(1.38, -23) * 290 * b
+        num = pn_f
+        den = pow(1.38, -23) * 290 * b_f
 
         f_f = round(num/den, 3)
 
-        print(f"\t    {pn}")
+        print(f"\t    {pn_f}")
         print(f"\t---------- = {f_f}")
-        print(f"\tK * Tₒ * {b}\n")
+        print(f"\tK * Tₒ * {b_f}\n")
 
         print(f"F = {f_f}")
 
@@ -234,21 +242,21 @@ def calculate_ST(f, b, b_unit, pn, pn_unit):
 
         print("Solve for B\n")
 
-        f = float(f.get())
-        pn = float(pn.get())
+        f_f = float(f.get())
+        pn_f = float(pn.get())
 
         print("\t    Pₙ")
         print("\t---------- = B")
         print("\tK * Tₒ * F\n")
 
-        num = pn
-        den = pow(1.38, -23) * 290 * f
+        num = pn_f
+        den = pow(1.38, -23) * 290 * f_f
 
         b_f = round(num/den, 3)
 
-        print(f"\t    {pn}")
+        print(f"\t    {pn_f}")
         print(f"\t---------- = {b_f}")
-        print(f"\tK * Tₒ * {f}\n")
+        print(f"\tK * Tₒ * {f_f}\n")
 
         print(f"B = {b_f}")
 

@@ -23,6 +23,18 @@ units_R = ["NMI", "KM", "M"]
 
 #!######## Units ########## Units ########## Units ########## Units ############
 #/////////////////////////////////////////////////////////////////////////////
+########## Init ########## Init ########## Init ########## Init ############
+
+pt_f = 0.0
+gt_f = 0.0
+gr_f = 0.0
+f_f = 0.0
+rcs_f = 0.0
+r_f = 0.0
+pr_f = 0.0
+
+#!######## Init ########## Init ########## Init ########## Init ############
+#///////////////////////////////////////////////////////////////////////////
 ########## Calc ########## Calc ########## Calc ########## Calc ############
 
 #?#?#       Pₜ * Gₜ * Gᵣ * λ² * σ
@@ -85,7 +97,7 @@ def validateInput(input):
 
 def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_unit):
 
-    #TODO print(f"{pt_unit}, {f_unit}, {rcs_unit}, {r_unit}, {pr_unit}")
+
 
     # Check if input is valid for calculation
     input = []
@@ -108,27 +120,27 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
 
         print("Solve for Pᵣ\n")
 
-        pt = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
-        gt = float(gt.get())
-        gr = float(gr.get())
-        f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
-        rcs = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
-        r = float(UnitConversion.convert_to_dBW(r.get(), r_unit))
+        pt_f = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        f_f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
+        rcs_f = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
+        r_f = float(UnitConversion.convert_to_dBW(r.get(), r_unit))
 
         print("\t Pₜ * Gₜ * Gᵣ * λ² * σ")
         print("\t---------------------- = Pᵣ")
         print("\t     (4π)³ * R⁴\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num = pt * gt * gr * pow(w, 2) * rcs
-        den = pow((4 * 3.14159265), 3) * pow(r, 4)
+        num = pt_f * gt_f * gr_f * pow(w, 2) * rcs_f
+        den = pow((4 * 3.14159265), 3) * pow(r_f, 4)
 
         pr_f = round(num/den, 3)
 
-        print(f"\t  {pt} * {gt} * {gr} * (C/{f})² * {rcs}")
+        print(f"\t  {pt_f} * {gt_f} * {gr_f} * (C/{f_f})² * {rcs_f}")
         print(f"\t------------------------------------------ = {pr_f}")
-        print(f"\t\t   (4π)³ * {r}⁴\n")
+        print(f"\t\t   (4π)³ * {r_f}⁴\n")
 
         print(f"Pᵣ = {pr_f}")
 
@@ -141,12 +153,12 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
         
         print("Solve for Pₜ\n")
 
-        gt = float(gt.get())
-        gr = float(gr.get())
-        f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
-        rcs = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
-        r = float(UnitConversion.convert_to_NMI(r.get(), r_unit))
-        pr = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        f_f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
+        rcs_f = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
+        r_f = float(UnitConversion.convert_to_NMI(r.get(), r_unit))
+        pr_f = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
 
         print("\t Pᵣ * (4π)³ * R⁴")
         print("\t----------------- = Pₜ")
@@ -159,9 +171,9 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
 
         pt_f = round(num/den, 3)
 
-        print(f"\t\t{pr} * (4π)³ * {r}⁴")
+        print(f"\t\t{pr_f} * (4π)³ * {r_f}⁴")
         print(f"\t--------------------------------  = {pt_f}")
-        print(f"\t {gt} * {gr} * {w}² * {rcs}\n")
+        print(f"\t {gt_f} * {gr_f} * {w}² * {rcs_f}\n")
 
         print(f"Pₜ = {pt_f}")
 
@@ -174,27 +186,27 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
 
         print("Solve for Gₜ\n")
 
-        pt = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
-        gr = float(gr.get())
-        f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
-        rcs = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
-        r = float(UnitConversion.convert_to_NMI(r.get(), r_unit))
-        pr = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
+        pt_f = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
+        gr_f = float(gr.get())
+        f_f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
+        rcs_f = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
+        r_f = float(UnitConversion.convert_to_NMI(r.get(), r_unit))
+        pr_f = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
 
         print("\t Pᵣ * (4π)³ * R⁴")
         print("\t----------------- = Gₜ")
         print("\t Pₜ * Gᵣ * λ² * σ\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
-        den = pt * gr * pow(w, 2) * rcs
+        num =  pr_f * pow((4 * 3.14159265), 3) * pow(r_f, 4)
+        den = pt_f * gr_f * pow(w, 2) * rcs_f
 
         gt_f = round(num/den, 3)
 
-        print(f"\t\t{pr} * (4π)³ * {r}⁴")
+        print(f"\t\t{pr_f} * (4π)³ * {r_f}⁴")
         print(f"\t--------------------------------  = {gt_f}")
-        print(f"\t {pt} * {gr} * {w}² * {rcs}\n")
+        print(f"\t {pt_f} * {gr_f} * {w}² * {rcs_f}\n")
 
         print(f"Gₜ = {gt_f}")
 
@@ -207,27 +219,27 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
 
         print("Solve for Gᵣ\n")
 
-        pt = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
-        gt = float(gt.get())
-        f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
-        rcs = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
-        r = float(UnitConversion.convert_to_NMI(r.get(), r_unit))
-        pr = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
+        pt_f = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
+        gt_f = float(gt.get())
+        f_f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
+        rcs_f = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
+        r_f = float(UnitConversion.convert_to_NMI(r.get(), r_unit))
+        pr_f = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
 
         print("\t Pᵣ * (4π)³ * R⁴")
         print("\t----------------- = Gᵣ")
         print("\t Pₜ * Gₜ * λ² * σ\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
-        den = pt * gt * pow(w, 2) * rcs
+        num =  pr_f * pow((4 * 3.14159265), 3) * pow(r_f, 4)
+        den = pt_f * gt_f * pow(w, 2) * rcs_f
 
         gr_f = round(num/den, 3)
 
-        print(f"\t\t{pr} * (4π)³ * {r}⁴")
+        print(f"\t\t{pr_f} * (4π)³ * {r_f}⁴")
         print(f"\t--------------------------------  = {gr_f}")
-        print(f"\t {pt} * {gt} * {w}² * {rcs}\n")
+        print(f"\t {pt_f} * {gt_f} * {w}² * {rcs_f}\n")
 
         print(f"Gᵣ = {gr_f}")
 
@@ -240,27 +252,27 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
 
         print("Solve for λ and ƒ\n")
 
-        pt = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
-        gt = float(gt.get())
-        gr = float(gr.get())
-        rcs = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
-        r = float(UnitConversion.convert_to_NMI(r.get(), r_unit))
-        pr = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
+        pt_f = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        rcs_f = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
+        r_f = float(UnitConversion.convert_to_NMI(r.get(), r_unit))
+        pr_f = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
 
         print("\t Pᵣ * (4π)³ * R⁴")
         print("\t----------------- = λ²")
         print("\t Pₜ * Gₜ * Gᵣ * σ\n")
 
-        num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
-        den = pt * gt * gr * rcs
+        num =  pr_f * pow((4 * 3.14159265), 3) * pow(r_f, 4)
+        den = pt_f * gt_f * gr_f * rcs_f
 
         w = round(pow(num/den, 0.5), 3)
 
         f_f = round((3 * pow(10, 8))/w, 3)
 
-        print(f"\t\t{pr} * (4π)³ * {r}⁴")
+        print(f"\t\t{pr_f} * (4π)³ * {r_f}⁴")
         print(f"\t--------------------------------  = {w}²")
-        print(f"\t {pt} * {gt} * {gr} * {rcs}\n")
+        print(f"\t {pt_f} * {gt_f} * {gr_f} * {rcs_f}\n")
 
         print(f"λ = {w}")
         print(f"ƒ = {f_f}")
@@ -274,27 +286,27 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
 
         print("Solve for σ\n")
 
-        pt = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
-        gt = float(gt.get())
-        gr = float(gr.get())
-        f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
-        r = float(UnitConversion.convert_to_NMI(r.get(), r_unit))
-        pr = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
+        pt_f = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        f_f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
+        r_f = float(UnitConversion.convert_to_NMI(r.get(), r_unit))
+        pr_f = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
 
         print("\t Pᵣ * (4π)³ * R⁴")
         print("\t----------------- = σ")
         print("\t Pₜ * Gₜ * Gᵣ * λ²\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
-        den = pt * gt * gr * pow(w, 2)
+        num =  pr_f * pow((4 * 3.14159265), 3) * pow(r_f, 4)
+        den = pt_f * gt_f * gr_f * pow(w, 2)
 
         rcs_f = round(num/den, 3)
 
-        print(f"\t\t{pr} * (4π)³ * {r}⁴")
+        print(f"\t\t{pr_f} * (4π)³ * {r_f}⁴")
         print(f"\t--------------------------------  = {rcs_f}")
-        print(f"\t {pt} * {gt} * {gr} * {w}²\n")
+        print(f"\t {pt_f} * {gt_f} * {gr_f} * {w}²\n")
 
         print(f"σ = {rcs_f}")
 
@@ -307,27 +319,27 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
 
         print("Solve for R\n")
 
-        pt = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
-        gt = float(gt.get())
-        gr = float(gr.get())
-        f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
-        rcs = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
-        pr = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
+        pt_f = float(UnitConversion.convert_to_dBW(pt.get(), pt_unit))
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        f_f = float(UnitConversion.convert_to_GHz(f.get(), f_unit))
+        rcs_f = float(UnitConversion.convert_to_m2(rcs.get(), rcs_unit))
+        pr_f = float(UnitConversion.convert_to_dBW(pr.get(), pr_unit))
 
         print("\t Pₜ * Gₜ * Gᵣ * λ² * σ")
         print("\t---------------------- = R⁴")
         print("\t     Pᵣ * (4π)³\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num = pt * gt * gr * pow(w, 2) * rcs
-        den = pow((4 * 3.14159265), 3) * pr
+        num = pt_f * gt_f * gr_f * pow(w, 2) * rcs_f
+        den = pow((4 * 3.14159265), 3) * pr_f
 
         r_f = round(pow(num/den, 0.25), 3)
 
-        print(f"\t  {pt} * {gt} * {gr} * (C/{f})² * {rcs}")
+        print(f"\t  {pt_f} * {gt_f} * {gr_f} * (C/{f_f})² * {rcs_f}")
         print(f"\t------------------------------------------ = {r_f}⁴")
-        print(f"\t\t   (4π)³ * {pr}\n")
+        print(f"\t\t   (4π)³ * {pr_f}\n")
 
         print(f"R = {r_f}")
 

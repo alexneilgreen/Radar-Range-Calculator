@@ -22,6 +22,19 @@ units_R = ["NMI", "KM", "M"]
 
 #!######## Units ########## Units ########## Units ########## Units ############
 #/////////////////////////////////////////////////////////////////////////////
+########## Init ########## Init ########## Init ########## Init ############
+
+pt_f = 0.0
+gt_f = 0.0
+gr_f = 0.0
+f_f = 0.0
+rcs_f = 0.0
+r_f = 0.0
+pn_f = 0.0
+snr_f = 0.0
+
+#!######## Init ########## Init ########## Init ########## Init ############
+#///////////////////////////////////////////////////////////////////////////
 ########## Calc ########## Calc ########## Calc ########## Calc ############
 
 def validateInput(input):
@@ -82,7 +95,6 @@ def validateInput(input):
 #?#?# Pᵣ = ----------------------
 #?#?#         (4π)³ * R⁴ * Pₙ
 
-#TODO not repopulating fields
 def calculate(pt, gt, gr, f, rcs, r, pn, snr, pt_unit, f_unit, rcs_unit, r_unit, pn_unit):
 
     
@@ -109,28 +121,28 @@ def calculate(pt, gt, gr, f, rcs, r, pn, snr, pt_unit, f_unit, rcs_unit, r_unit,
 
         print("Solve for SNR\n")
 
-        pt = float(pt.get())
-        gt = float(gt.get())
-        gr = float(gr.get())
-        f = float(f.get())
-        rcs = float(rcs.get())
-        r = float(r.get())
-        pn = float(pn.get())
+        pt_f = float(pt.get())
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        f_f = float(f.get())
+        rcs_f = float(rcs.get())
+        r_f = float(r.get())
+        pn_f = float(pn.get())
 
         print("\t Pₜ * Gₜ * Gᵣ * λ² * σ")
         print("\t---------------------- = SNR")
         print("\t  (4π)³ * R⁴ * Pₙ\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num = pt * gt * gr * pow(w, 2) * rcs
-        den = pow((4 * 3.14159265), 3) * pow(r, 4) * pn
+        num = pt_f * gt_f * gr_f * pow(w, 2) * rcs_f
+        den = pow((4 * 3.14159265), 3) * pow(r_f, 4) * pn_f
 
         snr_f = round(num/den, 3)
 
-        print(f"\t  {pt} * {gt} * {gr} * (C/{f})² * {rcs}")
+        print(f"\t  {pt_f} * {gt_f} * {gr_f} * (C/{f_f})² * {rcs_f}")
         print(f"\t------------------------------------------ = {snr_f}")
-        print(f"\t   (4π)³ * {r}⁴ * {pn}\n")
+        print(f"\t   (4π)³ * {r_f}⁴ * {pn_f}\n")
 
         print(f"SNR = {snr_f}")
 
@@ -143,28 +155,28 @@ def calculate(pt, gt, gr, f, rcs, r, pn, snr, pt_unit, f_unit, rcs_unit, r_unit,
         
         print("Solve for Pₜ\n")
 
-        gt = float(gt.get())
-        gr = float(gr.get())
-        f = float(f.get())
-        rcs = float(rcs.get())
-        r = float(r.get())
-        pn = float(pn.get())
-        snr = float(snr.get())
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        f_f = float(f.get())
+        rcs_f = float(rcs.get())
+        r_f = float(r.get())
+        pn_f = float(pn.get())
+        snr_f = float(snr.get())
 
         print("\t SNR * (4π)³ * R⁴ * Pₙ")
         print("\t------------------------ = Pₜ")
         print("\t   Gₜ * Gᵣ * λ² * σ\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num =  snr * pow((4 * 3.14159265), 3) * pow(r, 4) * pn
-        den = gt * gr * pow(w, 2) * rcs
+        num =  snr_f * pow((4 * 3.14159265), 3) * pow(r_f, 4) * pn_f
+        den = gt_f * gr_f * pow(w, 2) * rcs_f
 
         pt_f = round(num/den, 3)
 
-        print(f"\t {snr} * (4π)³ * {r}⁴ * {pn}")
+        print(f"\t {snr_f} * (4π)³ * {r_f}⁴ * {pn_f}")
         print(f"\t--------------------------------  = {pt_f}")
-        print(f"\t {gt} * {gr} * {w}² * {rcs}\n")
+        print(f"\t {gt_f} * {gr_f} * {w}² * {rcs_f}\n")
 
         print(f"Pₜ = {pt_f}")
 
@@ -177,28 +189,28 @@ def calculate(pt, gt, gr, f, rcs, r, pn, snr, pt_unit, f_unit, rcs_unit, r_unit,
 
         print("Solve for Gₜ\n")
 
-        pt = float(pt.get())
-        gr = float(gr.get())
-        f = float(f.get())
-        rcs = float(rcs.get())
-        r = float(r.get())
-        pn = float(pn.get())
-        snr = float(snr.get())
+        pt_f = float(pt.get())
+        gr_f = float(gr.get())
+        f_f = float(f.get())
+        rcs_f = float(rcs.get())
+        r_f = float(r.get())
+        pn_f = float(pn.get())
+        snr_f = float(snr.get())
 
         print("\t SNR * (4π)³ * R⁴ * Pₙ")
         print("\t---------------------- = Gₜ")
         print("\t  Pₜ * Gᵣ * λ² * σ\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num =  snr * pow((4 * 3.14159265), 3) * pow(r, 4) * pn
-        den = pt * gr * pow(w, 2) * rcs
+        num =  snr_f * pow((4 * 3.14159265), 3) * pow(r_f, 4) * pn_f
+        den = pt_f * gr_f * pow(w, 2) * rcs_f
 
         gt_f = round(num/den, 3)
 
-        print(f"\t {snr} * (4π)³ * {r}⁴ * {pn}")
+        print(f"\t {snr_f} * (4π)³ * {r_f}⁴ * {pn_f}")
         print(f"\t--------------------------------  = {gt_f}")
-        print(f"\t {pt} * {gr} * {w}² * {rcs}\n")
+        print(f"\t {pt_f} * {gr_f} * {w}² * {rcs_f}\n")
 
         print(f"Gₜ = {gt_f}")
 
@@ -211,28 +223,28 @@ def calculate(pt, gt, gr, f, rcs, r, pn, snr, pt_unit, f_unit, rcs_unit, r_unit,
 
         print("Solve for Gᵣ\n")
 
-        pt = float(pt.get())
-        gt = float(gt.get())
-        f = float(f.get())
-        rcs = float(rcs.get())
-        r = float(r.get())
-        pn = float(pn.get())
-        snr = float(snr.get())
+        pt_f = float(pt.get())
+        gt_f = float(gt.get())
+        f_f = float(f.get())
+        rcs_f = float(rcs.get())
+        r_f = float(r.get())
+        pn_f = float(pn.get())
+        snr_f = float(snr.get())
 
         print("\t SNR * (4π)³ * R⁴ * Pₙ")
         print("\t----------------------- = Gᵣ")
         print("\t   Pₜ * Gₜ * λ² * σ\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num =  snr * pow((4 * 3.14159265), 3) * pow(r, 4) * pn
-        den = pt * gt * pow(w, 2) * rcs
+        num =  snr_f * pow((4 * 3.14159265), 3) * pow(r_f, 4) * pn_f
+        den = pt_f * gt_f * pow(w, 2) * rcs_f
 
         gr_f = round(num/den, 3)
 
-        print(f"\t {snr} * (4π)³ * {r}⁴ * {pn}")
+        print(f"\t {snr_f} * (4π)³ * {r_f}⁴ * {pn_f}")
         print(f"\t--------------------------------  = {gr_f}")
-        print(f"\t {pt} * {gt} * {w}² * {rcs}\n")
+        print(f"\t {pt_f} * {gt_f} * {w}² * {rcs_f}\n")
 
         print(f"Gᵣ = {gr_f}")
 
@@ -245,28 +257,28 @@ def calculate(pt, gt, gr, f, rcs, r, pn, snr, pt_unit, f_unit, rcs_unit, r_unit,
 
         print("Solve for λ and ƒ\n")
 
-        pt = float(pt.get())
-        gt = float(gt.get())
-        gr = float(gr.get())
-        rcs = float(rcs.get())
-        r = float(r.get())
-        pn = float(pn.get())
-        snr = float(snr.get())
+        pt_f = float(pt.get())
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        rcs_f = float(rcs.get())
+        r_f = float(r.get())
+        pn_f = float(pn.get())
+        snr_f = float(snr.get())
 
         print("\t SNR * (4π)³ * R⁴ * Pₙ")
         print("\t----------------------- = λ²")
         print("\t   Pₜ * Gₜ * Gᵣ * σ\n")
 
-        num =  snr * pow((4 * 3.14159265), 3) * pow(r, 4) * pn
-        den = pt * gt * gr * rcs
+        num =  snr_f * pow((4 * 3.14159265), 3) * pow(r_f, 4) * pn_f
+        den = pt_f * gt_f * gr_f * rcs_f
 
         w = round(pow(num/den, 0.5), 3)
 
         f_f = round((3 * pow(10, 8))/w, 3)
 
-        print(f"\t {snr} * (4π)³ * {r}⁴ * {pn}")
+        print(f"\t {snr_f} * (4π)³ * {r_f}⁴ * {pn_f}")
         print(f"\t--------------------------------  = {w}²")
-        print(f"\t {pt} * {gt} * {gr} * {rcs}\n")
+        print(f"\t {pt_f} * {gt_f} * {gr_f} * {rcs_f}\n")
 
         print(f"λ = {w}")
         print(f"ƒ = {f_f}")
@@ -280,28 +292,28 @@ def calculate(pt, gt, gr, f, rcs, r, pn, snr, pt_unit, f_unit, rcs_unit, r_unit,
 
         print("Solve for σ\n")
 
-        pt = float(pt.get())
-        gt = float(gt.get())
-        gr = float(gr.get())
-        f = float(f.get())
-        r = float(r.get())
-        pn = float(pn.get())
-        snr = float(snr.get())
+        pt_f = float(pt.get())
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        f_f = float(f.get())
+        r_f = float(r.get())
+        pn_f = float(pn.get())
+        snr_f = float(snr.get())
 
         print("\t SNR * (4π)³ * R⁴ * Pₙ")
         print("\t----------------------- = σ")
         print("\t   Pₜ * Gₜ * Gᵣ * λ²\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
         num =  snr * pow((4 * 3.14159265), 3) * pow(r, 4) * pn
         den = pt * gt * gr * pow(w, 2)
 
         rcs_f = round(num/den, 3)
 
-        print(f"\t {snr} * (4π)³ * {r}⁴ * {pn}")
+        print(f"\t {snr_f} * (4π)³ * {r_f}⁴ * {pn_f}")
         print(f"\t--------------------------------  = {rcs_f}")
-        print(f"\t {pt} * {gt} * {gr} * {w}²\n")
+        print(f"\t {pt_f} * {gt_f} * {gr_f} * {w}²\n")
 
         print(f"σ = {rcs_f}")
 
@@ -314,28 +326,28 @@ def calculate(pt, gt, gr, f, rcs, r, pn, snr, pt_unit, f_unit, rcs_unit, r_unit,
 
         print("Solve for R\n")
 
-        pt = float(pt.get())
-        gt = float(gt.get())
-        gr = float(gr.get())
-        f = float(f.get())
-        rcs = float(rcs.get())
-        pn = float(pn.get())
-        snr = float(snr.get())
+        pt_f = float(pt.get())
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        f_f = float(f.get())
+        rcs_f = float(rcs.get())
+        pn_f = float(pn.get())
+        snr_f = float(snr.get())
 
         print("\t Pₜ * Gₜ * Gᵣ * λ² * σ")
         print("\t---------------------- = R⁴")
         print("\t   SNR * (4π)³ * Pₙ\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num = pt * gt * gr * pow(w, 2) * rcs
-        den = pow((4 * 3.14159265), 3) * snr * pn
+        num = pt_f * gt_f * gr_f * pow(w, 2) * rcs_f
+        den = pow((4 * 3.14159265), 3) * snr_f * pn_f
 
         r_f = round(pow(num/den, 0.25), 3)
 
-        print(f"\t  {pt} * {gt} * {gr} * (C/{f})² * {rcs}")
+        print(f"\t  {pt_f} * {gt_f} * {gr_f} * (C/{f_f})² * {rcs_f}")
         print(f"\t------------------------------------------ = {r_f}⁴")
-        print(f"\t   SNR * (4π)³ * {pn}\n")
+        print(f"\t   SNR * (4π)³ * {pn_f}\n")
 
         print(f"R = {r_f}")
 
@@ -348,28 +360,28 @@ def calculate(pt, gt, gr, f, rcs, r, pn, snr, pt_unit, f_unit, rcs_unit, r_unit,
 
         print("Solve for Pₙ\n")
 
-        pt = float(pt.get())
-        gt = float(gt.get())
-        gr = float(gr.get())
-        f = float(f.get())
-        rcs = float(rcs.get())
-        r = float(r.get())
-        snr = float(snr.get())
+        pt_f = float(pt.get())
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        f_f = float(f.get())
+        rcs_f = float(rcs.get())
+        r_f = float(r.get())
+        snr_f = float(snr.get())
 
         print("\t Pₜ * Gₜ * Gᵣ * λ² * σ")
         print("\t---------------------- = Pₙ")
         print("\t   SNR * (4π)³ * R⁴\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num = pt * gt * gr * pow(w, 2) * rcs
-        den = pow((4 * 3.14159265), 3) * snr * pow(r, 4)
+        num = pt_f * gt_f * gr_f * pow(w, 2) * rcs_f
+        den = pow((4 * 3.14159265), 3) * snr_f * pow(r_f, 4)
 
         pn_f = round(num/den, 3)
 
-        print(f"\t  {pt} * {gt} * {gr} * (C/{f})² * {rcs}")
+        print(f"\t  {pt_f} * {gt_f} * {gr_f} * (C/{f_f})² * {rcs_f}")
         print(f"\t------------------------------------------ = {pn_f}")
-        print(f"\t   SNR * (4π)³ * {r}⁴\n")
+        print(f"\t   {snr_f} * (4π)³ * {r_f}⁴\n")
 
         print(f"Pₙ = {pn_f}")
 

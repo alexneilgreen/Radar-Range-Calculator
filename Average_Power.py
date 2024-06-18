@@ -22,6 +22,21 @@ units_R = ["NMI", "KM", "M"]
 
 #!######## Units ########## Units ########## Units ########## Units ############
 #/////////////////////////////////////////////////////////////////////////////
+########## Init ########## Init ########## Init ########## Init ############
+
+pavg_f = 0.0
+td_f = 0.0
+gt_f = 0.0
+gr_f = 0.0
+f_f = 0.0
+rcs_f = 0.0
+r_f = 0.0
+pn_f = 0.0
+ls_f = 0.0
+snr_f = 0.0
+
+#!######## Init ########## Init ########## Init ########## Init ############
+#///////////////////////////////////////////////////////////////////////////
 ########## Calc ########## Calc ########## Calc ########## Calc ############
 
 def validateInput(input):
@@ -110,30 +125,30 @@ def calculate(pavg, td, gt, gr, f, rcs, r, pn, ls, snr, pavg_unit, td_unit, f_un
 
         print("Solve for SNR\n")
 
-        pavg = float(pavg.get())
-        td = float(td.get())
-        gt = float(gt.get())
-        gr = float(gr.get())
-        f = float(f.get())
-        rcs = float(rcs.get())
-        r = float(r.get())
-        pn = float(pn.get())
-        ls = float(ls.get())
+        pavg_f = float(pavg.get())
+        td_f = float(td.get())
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        f_f = float(f.get())
+        rcs_f = float(rcs.get())
+        r_f = float(r.get())
+        pn_f = float(pn.get())
+        ls_f = float(ls.get())
 
         print("\t Pₐᵥ₉ * Td * Gₜ * Gᵣ * λ² * σ")
         print("\t------------------------------ = SNR")
         print("\t   (4π)³ * R⁴ * Pₙ * Lₛ\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num = pavg * td * gt * gr * pow(w, 2) * rcs
-        den = pow((4 * 3.14159265), 3) * pow(r, 4) * pn * ls
+        num = pavg_f * td_f * gt_f * gr_f * pow(w, 2) * rcs_f
+        den = pow((4 * 3.14159265), 3) * pow(r_f, 4) * pn_f * ls_f
 
         snr_f = round(num/den, 3)
 
-        print(f"\t {pavg} * {td} * {gt} * {gr} * (C/{f})² * {rcs}")
+        print(f"\t {pavg_f} * {td_f} * {gt_f} * {gr_f} * (C/{f_f})² * {rcs_f}")
         print(f"\t----------------------------------------------- = {snr_f}")
-        print(f"\t   (4π)³ * {r}⁴ * {pn} * {ls}\n")
+        print(f"\t   (4π)³ * {r_f}⁴ * {pn_f} * {ls_f}\n")
 
         print(f"SNR = {snr_f}")
 
@@ -146,66 +161,66 @@ def calculate(pavg, td, gt, gr, f, rcs, r, pn, ls, snr, pavg_unit, td_unit, f_un
         
         print("Solve for Pₐᵥ₉\n")
 
-        td = float(td.get())
-        gt = float(gt.get())
-        gr = float(gr.get())
-        f = float(f.get())
-        rcs = float(rcs.get())
-        r = float(r.get())
-        pn = float(pn.get())
-        ls = float(ls.get())
-        snr = float(snr.get())
+        td_f = float(td.get())
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        f_f = float(f.get())
+        rcs_f = float(rcs.get())
+        r_f = float(r.get())
+        pn_f = float(pn.get())
+        ls_f = float(ls.get())
+        snr_f = float(snr.get())
 
         print("\t SNR * (4π)³ * R⁴ * Pₙ * Lₛ")
         print("\t---------------------------- = Pₐᵥ₉")
         print("\t   Td * Gₜ * Gᵣ * λ² * σ\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num =  snr * pow((4 * 3.14159265), 3) * pow(r, 4) * pn * ls
-        den = td * gt * gr * pow(w, 2) * rcs
+        num =  snr_f * pow((4 * 3.14159265), 3) * pow(r_f, 4) * pn_f * ls_f
+        den = td_f * gt_f * gr_f * pow(w, 2) * rcs_f
 
         pavg_f = round(num/den, 3)
 
-        print(f"\t {snr} * (4π)³ * {r}⁴ * {pn} * {ls}")
+        print(f"\t {snr_f} * (4π)³ * {r_f}⁴ * {pn_f} * {ls_f}")
         print(f"\t-------------------------------------  = {pavg_f}")
-        print(f"\t {td} * {gt} * {gr} * {w}² * {rcs}\n")
+        print(f"\t {td_f} * {gt_f} * {gr_f} * {w}² * {rcs_f}\n")
 
         print(f"Pₐᵥ₉ = {pavg_f}")
 
         print("\n---------\n")
 
         pavg.delete(0, tk.END)
-        pavg.insert(0, pavg)
+        pavg.insert(0, pavg_f)
 
     elif not td.get():
 
         print("Solve for Td\n")
 
-        pavg = float(pavg.get())
-        gt = float(gt.get())
-        gr = float(gr.get())
-        f = float(f.get())
-        rcs = float(rcs.get())
-        r = float(r.get())
-        pn = float(pn.get())
-        ls = float(ls.get())
-        snr = float(snr.get())
+        pavg_f = float(pavg.get())
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        f_f = float(f.get())
+        rcs_f = float(rcs.get())
+        r_f = float(r.get())
+        pn_f = float(pn.get())
+        ls_f = float(ls.get())
+        snr_f = float(snr.get())
 
         print("\t SNR * (4π)³ * R⁴ * Pₙ * Lₛ")
         print("\t---------------------------- = Td")
         print("\t  Pₐᵥ₉ * Gₜ * Gᵣ * λ² * σ\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num =  snr * pow((4 * 3.14159265), 3) * pow(r, 4) * pn * ls
-        den = pavg * gt * gr * pow(w, 2) * rcs
+        num =  snr_f * pow((4 * 3.14159265), 3) * pow(r_f, 4) * pn_f * ls_f
+        den = pavg_f * gt_f * gr_f * pow(w, 2) * rcs_f
 
         td_f = round(num/den, 3)
 
-        print(f"\t {snr} * (4π)³ * {r}⁴ * {pn} * {ls}")
+        print(f"\t {snr_f} * (4π)³ * {r_f}⁴ * {pn_f} * {ls_f}")
         print(f"\t-------------------------------------  = {td_f}")
-        print(f"\t {pavg} * {gt} * {gr} * {w}² * {rcs}\n")
+        print(f"\t {pavg_f} * {gt_f} * {gr_f} * {w}² * {rcs_f}\n")
 
         print(f"Td = {td_f}")
 
@@ -218,30 +233,30 @@ def calculate(pavg, td, gt, gr, f, rcs, r, pn, ls, snr, pavg_unit, td_unit, f_un
 
         print("Solve for Gₜ\n")
 
-        pavg = float(pavg.get())
-        td = float(td.get())
-        gr = float(gr.get())
-        f = float(f.get())
-        rcs = float(rcs.get())
-        r = float(r.get())
-        pn = float(pn.get())
-        ls = float(ls.get())
-        snr = float(snr.get())
+        pavg_f = float(pavg.get())
+        td_f = float(td.get())
+        gr_f = float(gr.get())
+        f_f = float(f.get())
+        rcs_f = float(rcs.get())
+        r_f = float(r.get())
+        pn_f = float(pn.get())
+        ls_f = float(ls.get())
+        snr_f = float(snr.get())
 
         print("\t SNR * (4π)³ * R⁴ * Pₙ * Lₛ")
         print("\t---------------------------- = Gₜ")
         print("\t  Pₐᵥ₉ * Td * Gᵣ * λ² * σ\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num =  snr * pow((4 * 3.14159265), 3) * pow(r, 4) * pn * ls
-        den = pavg * td * gr * pow(w, 2) * rcs
+        num =  snr_f * pow((4 * 3.14159265), 3) * pow(r_f, 4) * pn_f * ls_f
+        den = pavg_f * td_f * gr_f * pow(w, 2) * rcs_f
 
         gt_f = round(num/den, 3)
 
-        print(f"\t {snr} * (4π)³ * {r}⁴ * {pn} * {ls}")
+        print(f"\t {snr_f} * (4π)³ * {r_f}⁴ * {pn_f} * {ls_f}")
         print(f"\t-------------------------------------  = {gt_f}")
-        print(f"\t {pavg} * {td} * {gr} * {w}² * {rcs}\n")
+        print(f"\t {pavg_f} * {td_f} * {gr_f} * {w}² * {rcs_f}\n")
 
         print(f"Gₜ = {gt_f}")
 
@@ -254,30 +269,30 @@ def calculate(pavg, td, gt, gr, f, rcs, r, pn, ls, snr, pavg_unit, td_unit, f_un
 
         print("Solve for Gᵣ\n")
 
-        pavg = float(pavg.get())
-        td = float(td.get())
-        gt = float(gt.get())
-        f = float(f.get())
-        rcs = float(rcs.get())
-        r = float(r.get())
-        pn = float(pn.get())
-        ls = float(ls.get())
-        snr = float(snr.get())
+        pavg_f = float(pavg.get())
+        td_f = float(td.get())
+        gt_f = float(gt.get())
+        f_f = float(f.get())
+        rcs_f = float(rcs.get())
+        r_f = float(r.get())
+        pn_f = float(pn.get())
+        ls_f = float(ls.get())
+        snr_f = float(snr.get())
 
         print("\t SNR * (4π)³ * R⁴ * Pₙ * Lₛ")
         print("\t---------------------------- = Gᵣ")
         print("\t  Pₐᵥ₉ * Td * Gₜ * λ² * σ\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num =  snr * pow((4 * 3.14159265), 3) * pow(r, 4) * pn * ls
-        den = pavg * td * gt * pow(w, 2) * rcs
+        num =  snr_f * pow((4 * 3.14159265), 3) * pow(r_f, 4) * pn_f * ls_f
+        den = pavg_f * td_f * gt_f * pow(w, 2) * rcs_f
 
         gr_f = round(num/den, 3)
 
-        print(f"\t {snr} * (4π)³ * {r}⁴ * {pn} * {ls}")
+        print(f"\t {snr_f} * (4π)³ * {r_f}⁴ * {pn_f} * {ls_f}")
         print(f"\t-------------------------------------  = {gr_f}")
-        print(f"\t {pavg} * {td} * {gt} * {w}² * {rcs}\n")
+        print(f"\t {pavg_f} * {td_f} * {gt_f} * {w}² * {rcs_f}\n")
 
         print(f"Gᵣ = {gr_f}")
 
@@ -290,30 +305,30 @@ def calculate(pavg, td, gt, gr, f, rcs, r, pn, ls, snr, pavg_unit, td_unit, f_un
 
         print("Solve for λ and ƒ\n")
 
-        pavg = float(pavg.get())
-        td = float(td.get())
-        gt = float(gt.get())
-        gr = float(gr.get())
-        rcs = float(rcs.get())
-        r = float(r.get())
-        pn = float(pn.get())
-        ls = float(ls.get())
-        snr = float(snr.get())
+        pavg_f = float(pavg.get())
+        td_f = float(td.get())
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        rcs_f = float(rcs.get())
+        r_f = float(r.get())
+        pn_f = float(pn.get())
+        ls_f = float(ls.get())
+        snr_f = float(snr.get())
 
         print("\t SNR * (4π)³ * R⁴ * Pₙ * Lₛ")
         print("\t---------------------------- = λ²")
         print("\t  Pₐᵥ₉ * Td * Gₜ * Gᵣ * σ\n")
 
-        num =  snr * pow((4 * 3.14159265), 3) * pow(r, 4) * pn * ls
-        den = pavg * td * gt * gr * rcs
+        num =  snr_f * pow((4 * 3.14159265), 3) * pow(r_f, 4) * pn_f * ls_f
+        den = pavg_f * td_f * gt_f * gr_f * rcs_f
 
         w = round(pow(num/den, 0.5), 3)
 
         f_f = round((3 * pow(10, 8))/w, 3)
 
-        print(f"\t {snr} * (4π)³ * {r}⁴ * {pn} * {ls}")
+        print(f"\t {snr_f} * (4π)³ * {r_f}⁴ * {pn_f} * {ls_f}")
         print(f"\t-------------------------------------  = {w}²")
-        print(f"\t {pavg} * {td} * {gt} * {gr} * {rcs}\n")
+        print(f"\t {pavg_f} * {td_f} * {gt_f} * {gr_f} * {rcs_f}\n")
 
         print(f"λ = {w}")
         print(f"ƒ = {f_f}")
@@ -327,30 +342,30 @@ def calculate(pavg, td, gt, gr, f, rcs, r, pn, ls, snr, pavg_unit, td_unit, f_un
 
         print("Solve for σ\n")
 
-        pavg = float(pavg.get())
-        td = float(td.get())
-        gt = float(gt.get())
-        gr = float(gr.get())
-        f = float(f.get())
-        r = float(r.get())
-        pn = float(pn.get())
-        ls = float(ls.get())
-        snr = float(snr.get())
+        pavg_f = float(pavg.get())
+        td_f = float(td.get())
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        f_f = float(f.get())
+        r_f = float(r.get())
+        pn_f = float(pn.get())
+        ls_f = float(ls.get())
+        snr_f = float(snr.get())
 
         print("\t SNR * (4π)³ * R⁴ * Pₙ * Lₛ")
         print("\t---------------------------- = σ")
         print("\t  Pₐᵥ₉ * Td * Gₜ * Gᵣ * λ²\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num =  snr * pow((4 * 3.14159265), 3) * pow(r, 4) * pn * ls
-        den = pavg * td * gt * gr * pow(w, 2)
+        num = snr_f * pow((4 * 3.14159265), 3) * pow(r_f, 4) * pn_f * ls_f
+        den = pavg_f * td_f * gt_f * gr_f * pow(w, 2)
 
         rcs_f = round(num/den, 3)
 
-        print(f"\t {snr} * (4π)³ * {r}⁴ * {pn} * {ls}")
+        print(f"\t {snr_f} * (4π)³ * {r_f}⁴ * {pn_f} * {ls_f}")
         print(f"\t-----------------------------------  = {rcs_f}")
-        print(f"\t {pavg} * {td} * {gt} * {gr} * {w}²\n")
+        print(f"\t {pavg_f} * {td_f} * {gt_f} * {gr_f} * {w}²\n")
 
         print(f"σ = {rcs_f}")
 
@@ -363,30 +378,30 @@ def calculate(pavg, td, gt, gr, f, rcs, r, pn, ls, snr, pavg_unit, td_unit, f_un
 
         print("Solve for R\n")
 
-        pavg = float(pavg.get())
-        td = float(td.get())
-        gt = float(gt.get())
-        gr = float(gr.get())
-        f = float(f.get())
-        rcs = float(rcs.get())
-        pn = float(pn.get())
-        ls = float(ls.get())
-        snr = float(snr.get())
+        pavg_f = float(pavg.get())
+        td_f = float(td.get())
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        f_f = float(f.get())
+        rcs_f = float(rcs.get())
+        pn_f = float(pn.get())
+        ls_f = float(ls.get())
+        snr_f = float(snr.get())
 
         print("\t Pₐᵥ₉ * Td * Gₜ * Gᵣ * λ² * σ")
         print("\t------------------------------ = R⁴")
         print("\t  SNR * (4π)³ * Pₙ * Lₛ\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num = pavg * td * gt * gr * pow(w, 2) * rcs
-        den = snr * pow((4 * 3.14159265), 3) * pn * ls
+        num = pavg_f * td_f * gt_f * gr_f * pow(w, 2) * rcs_f
+        den = snr_f * pow((4 * 3.14159265), 3) * pn_f * ls_f
 
         r_f = round(pow(num/den, 0.25), 3)
 
-        print(f"\t {pavg} * {td} * {gt} * {gr} * (C/{f})² * {rcs}")
+        print(f"\t {pavg_f} * {td_f} * {gt_f} * {gr_f} * (C/{f_f})² * {rcs_f}")
         print(f"\t----------------------------------------------- = {r_f}⁴")
-        print(f"\t    {snr} * (4π)³ * {pn} * {ls}\n")
+        print(f"\t    {snr_f} * (4π)³ * {pn_f} * {ls_f}\n")
 
         print(f"R = {r_f}")
 
@@ -399,30 +414,30 @@ def calculate(pavg, td, gt, gr, f, rcs, r, pn, ls, snr, pavg_unit, td_unit, f_un
 
         print("Solve for Pₙ\n")
 
-        pavg = float(pavg.get())
-        td = float(td.get())
-        gt = float(gt.get())
-        gr = float(gr.get())
-        f = float(f.get())
-        rcs = float(rcs.get())
-        r = float(r.get())
-        ls = float(ls.get())
-        snr = float(snr.get())
+        pavg_f = float(pavg.get())
+        td_f = float(td.get())
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        f_f = float(f.get())
+        rcs_f = float(rcs.get())
+        r_f = float(r.get())
+        ls_f = float(ls.get())
+        snr_f = float(snr.get())
 
         print("\t Pₐᵥ₉ * Td * Gₜ * Gᵣ * λ² * σ")
         print("\t------------------------------ = Pₙ")
         print("\t  SNR * (4π)³ * R⁴ * Lₛ\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num = pavg * td * gt * gr * pow(w, 2) * rcs
-        den = pow((4 * 3.14159265), 3) * snr * pow(r, 4) * ls
+        num = pavg_f * td_f * gt_f * gr_f * pow(w, 2) * rcs_f
+        den = pow((4 * 3.14159265), 3) * snr_f * pow(r_f, 4) * ls_f
 
         pn_f = round(num/den, 3)
 
-        print(f"\t {pavg} * {td} * {gt} * {gr} * (C/{f})² * {rcs}")
+        print(f"\t {pavg_f} * {td_f} * {gt_f} * {gr_f} * (C/{f_f})² * {rcs_f}")
         print(f"\t------------------------------------------------ = {pn_f}")
-        print(f"\t   {snr} * (4π)³ * {r}⁴ * {ls}\n")
+        print(f"\t   {snr_f} * (4π)³ * {r_f}⁴ * {ls_f}\n")
 
         print(f"Pₙ = {pn_f}")
 
@@ -435,30 +450,30 @@ def calculate(pavg, td, gt, gr, f, rcs, r, pn, ls, snr, pavg_unit, td_unit, f_un
 
         print("Solve for Pₙ\n")
 
-        pavg = float(pavg.get())
-        td = float(td.get())
-        gt = float(gt.get())
-        gr = float(gr.get())
-        f = float(f.get())
-        rcs = float(rcs.get())
-        r = float(r.get())
-        pn = float(pn.get())
-        snr = float(snr.get())
+        pavg_f = float(pavg.get())
+        td_f = float(td.get())
+        gt_f = float(gt.get())
+        gr_f = float(gr.get())
+        f_f = float(f.get())
+        rcs_f = float(rcs.get())
+        r_f = float(r.get())
+        pn_f = float(pn.get())
+        snr_f = float(snr.get())
 
         print("\t Pₐᵥ₉ * Td * Gₜ * Gᵣ * λ² * σ")
         print("\t------------------------------ = Lₛ")
         print("\t  SNR * (4π)³ * R⁴ * Pₙ\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num = pavg * td * gt * gr * pow(w, 2) * rcs
-        den = pow((4 * 3.14159265), 3) * snr * pow(r, 4) * pn
+        num = pavg_f * td_f * gt_f * gr_f * pow(w, 2) * rcs_f
+        den = pow((4 * 3.14159265), 3) * snr_f * pow(r_f, 4) * pn_f
 
         ls_f = round(num/den, 3)
 
-        print(f"\t {pavg} * {td} * {gt} * {gr} * (C/{f})² * {rcs}")
+        print(f"\t {pavg_f} * {td_f} * {gt_f} * {gr_f} * (C/{f_f})² * {rcs_f}")
         print(f"\t------------------------------------------------ = {ls_f}")
-        print(f"\t   {snr} * (4π)³ * {r}⁴ * {pn}\n")
+        print(f"\t   {snr_f} * (4π)³ * {r_f}⁴ * {pn_f}\n")
 
         print(f"Lₛ = {ls_f}")
 
