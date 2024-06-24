@@ -95,6 +95,39 @@ def validateInput(input):
 
         return False
 
+def graphData():
+    return
+
+#TODO: This whole Graph function is caca poo poo right now
+def graph():
+
+    print(pt_f)
+    print(gt_f)
+    print(gr_f)
+    print(f_f)
+    print(rcs_f)
+    print(r_f)
+    print(pr_f)
+
+    r = [0.0]
+    deviation = int(r_f/100)
+    
+    # for (x = 0, x > r_f, x += deviation)
+    x = 0
+    for x in range(x, r_f, deviation):
+        print(x)
+        r.append(int(x))
+
+
+    # Graph
+    plt.plot([r_f - 1, r_f, r_f + 1], [pr_f - 1, pr_f, pr_f + 1])
+    plt.title('Recieved Power Form of Radar Range Equation')
+    plt.xlabel('Range')
+    plt.ylabel('Power Recieved')
+    plt.show()
+
+    return
+
 def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_unit):
 
 
@@ -112,6 +145,17 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
         return
     else : 
         pass
+
+
+
+    # Global Variables
+    global pt_f
+    global gt_f
+    global gr_f
+    global f_f
+    global rcs_f
+    global r_f
+    global pr_f
 
 
 
@@ -417,6 +461,10 @@ def create_RP_tab_content(tab1):
     btn_plot = tk.Button(tab1, text="Calc", command=lambda: calculate(pt_entry, gt_entry, gr_entry, f_entry, rcs_entry, r_entry, pr_entry, 
                                                                       pt_unit.get(), f_unit.get(), rcs_unit.get(), r_unit.get(), pr_unit.get()), 
                                                                       font=default_font, width=7, bg='darkgray')
+    btn_plot.grid(row=6, column=3, padx=10, pady=10)
+
+    # Plot button
+    btn_plot = tk.Button(tab1, text="Plot", command=lambda: graph(), font=default_font, width=7, bg='darkgray')
     btn_plot.grid(row=7, column=3, padx=10, pady=10)
 
     # Insert image

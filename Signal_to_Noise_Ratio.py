@@ -116,6 +116,18 @@ def calculate(pt, gt, gr, f, rcs, r, pn, snr, pt_unit, f_unit, rcs_unit, r_unit,
 
 
 
+    # Global Variables
+    global pt_f
+    global gt_f
+    global gr_f
+    global f_f
+    global rcs_f
+    global r_f
+    global pn_f
+    global snr_f
+
+
+
     # Calculations Start
     if not snr.get():
 

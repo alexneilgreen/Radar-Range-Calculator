@@ -120,6 +120,19 @@ def calculate(pavg, td, gt, gr, f, rcs, r, pn, ls, snr, pavg_unit, td_unit, f_un
 
 
 
+    # Global Variables
+    global pavg_f
+    global gt_f
+    global gr_f
+    global f_f
+    global rcs_f
+    global r_f
+    global pn_f
+    global ls_f
+    global snr_f
+
+
+
     # Calculations Start
     if not snr.get():
 

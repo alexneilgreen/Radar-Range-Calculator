@@ -116,6 +116,19 @@ def calculate(pj, gj, grj, f, rjr, ltj, la, lr, prj, pj_unit, rjr_unit, prj_unit
 
 
 
+    # Global Variables
+    global pj_f
+    global gj_f
+    global grj_f
+    global f_f
+    global rjr_f
+    global ltj_f
+    global la_f
+    global lr_f
+    global prj_f
+
+
+
     # Calculations Start
     if not prj.get():
 

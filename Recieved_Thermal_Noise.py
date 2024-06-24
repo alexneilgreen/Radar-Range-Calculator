@@ -98,6 +98,15 @@ def calculate_SNT(ts, b, b_unit, pn, pn_unit):
     else : 
         pass
 
+
+
+    # Global Variables
+    global ts_f
+    global b_f
+    global pn_f
+
+
+
     if not pn.get():
 
         print("Solve for Pₙ\n")
