@@ -1,5 +1,6 @@
 # tab1_content.py
 #TODO Finish Conversions
+import numpy as np
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
@@ -95,35 +96,41 @@ def validateInput(input):
 
         return False
 
-def graphData():
-    return
-
-#TODO: This whole Graph function is caca poo poo right now
 def graph():
-
-    print(pt_f)
-    print(gt_f)
-    print(gr_f)
-    print(f_f)
-    print(rcs_f)
-    print(r_f)
-    print(pr_f)
-
-    r = [0.0]
-    deviation = int(r_f/100)
+    global pt_f, gt_f, gr_f, f_f, rcs_f, pr_f
     
-    # for (x = 0, x > r_f, x += deviation)
-    x = 0
-    for x in range(x, r_f, deviation):
-        print(x)
-        r.append(int(x))
+    # Generate 50 points below pr_f and 50 points above pr_f using logarithmic scale
+    points_below = np.logspace(np.log10(pr_f/100), np.log10(pr_f), num=50, endpoint=False)
+    points_above = np.logspace(np.log10(pr_f), np.log10(pr_f*100), num=50, endpoint=True)
+    
+    # Combine both lists
+    x_values = np.concatenate((points_below, points_above))
+    
+    # Generate corresponding y values based on recalculated r for each pr value
+    y_values = []
+    for pr in x_values:
+        w = (3 * 10**8) / f_f
+        num = pt_f * gt_f * gr_f * w**2 * rcs_f
+        den = (4 * 3.14159265)**3 * pr
+        r = (num / den)**0.25
+        y_values.append(r)
+    
+    # Determine the maximum range value
+    xmax_range = max(x_values) * 1.1
+    ymax_range = max(y_values) * 1.1
 
+    xmin_range = max(x_values) * -0.05
+    ymin_range = max(y_values) * -0.05
 
-    # Graph
-    plt.plot([r_f - 1, r_f, r_f + 1], [pr_f - 1, pr_f, pr_f + 1])
-    plt.title('Recieved Power Form of Radar Range Equation')
-    plt.xlabel('Range')
-    plt.ylabel('Power Recieved')
+    # Plotting
+    plt.figure(figsize=(8, 6))
+    plt.plot(x_values, y_values)#, marker='o', linestyle='-')
+    plt.title('Received Power Form of Radar Range Equation')
+    plt.xlabel('Received Power')
+    plt.ylabel('Range')
+    plt.xlim(xmin_range, xmax_range)
+    plt.ylim(ymin_range, ymax_range)
+    plt.grid(True, which="both", ls="--")
     plt.show()
 
     return
@@ -208,10 +215,10 @@ def calculate(pt, gt, gr, f, rcs, r, pr, pt_unit, f_unit, rcs_unit, r_unit, pr_u
         print("\t----------------- = Pₜ")
         print("\t Gₜ * Gᵣ * λ² * σ\n")
 
-        w = (3 * pow(10, 8))/f
+        w = (3 * pow(10, 8))/f_f
 
-        num =  pr * pow((4 * 3.14159265), 3) * pow(r, 4)
-        den = gt * gr * pow(w, 2) * rcs
+        num =  pr_f * pow((4 * 3.14159265), 3) * pow(r_f, 4)
+        den = gt_f * gr_f * pow(w, 2) * rcs_f
 
         pt_f = round(num/den, 3)
 
