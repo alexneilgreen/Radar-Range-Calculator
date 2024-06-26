@@ -1,5 +1,6 @@
 # tab2
 #TODO Finish Conversions
+import numpy as np
 import tkinter as tk
 from tkinter import ttk
 import matplotlib.pyplot as plt
@@ -83,6 +84,44 @@ def validateInput(input):
     else :
 
         return False
+
+def graph():
+    global ts_f, b_f, pn_f
+    
+    # Generate 50 points below pr_f and 50 points above pr_f using logarithmic scale
+    points_below = np.logspace(np.log10(pn_f/100), np.log10(pn_f), num=50, endpoint=False)
+    points_above = np.logspace(np.log10(pn_f), np.log10(pn_f*100), num=50, endpoint=True)
+    
+    # Combine both lists
+    x_values = np.concatenate((points_below, points_above))
+    
+    # Generate corresponding y values based on recalculated r for each pr value
+    y_values = []
+    for pn in x_values:
+        num = b_f * 1.38**-23
+        den = pn
+        ts = (num / den)
+        y_values.append(ts)
+    
+    # Determine the maximum range value
+    xmax_range = max(x_values) * 1.1
+    ymax_range = max(y_values) * 1.1
+
+    xmin_range = max(x_values) * -0.05
+    ymin_range = max(y_values) * -0.05
+
+    # Plotting
+    plt.figure(figsize=(8, 6))
+    plt.plot(x_values, y_values)#, marker='o', linestyle='-')
+    plt.title('Received Thermal Noise of Radar Range Equation')
+    plt.xlabel('Recieved Thermal Noise')
+    plt.ylabel('Temperature')
+    plt.xlim(xmin_range, xmax_range)
+    plt.ylim(ymin_range, ymax_range)
+    plt.grid(True, which="both", ls="--")
+    plt.show()
+
+    return
 
 #?#?# Pₙ = K * Tₛ * B
 
@@ -318,13 +357,17 @@ def create_RTN_tab_content(tab2):
     pn_unit_menu = ttk.Combobox(tab2, textvariable=pn_unit, values=units_P, font=default_font, state="readonly", width=6)
     pn_unit_menu.grid(row=6, column=2, padx=10, pady=10)
 
-    # Plot button System Noise Temperature
+    # Calc button System Noise Temperature
     ts_btn_plot = tk.Button(tab2, text="Calc SNT", command=lambda: calculate_SNT(ts_entry, b_entry, b_unit.get(), pn_entry, pn_unit.get()), font=default_font, width=7, bg='darkgray')
     ts_btn_plot.grid(row=4, column=3, padx=10, pady=10)
 
-    # Plot button Standard Temperature
+    # Calc button Standard Temperature
     to_btn_plot = tk.Button(tab2, text="Calc ST", command=lambda: calculate_ST(f_entry, b_entry, b_unit.get(), pn_entry, pn_unit.get()), font=default_font, width=7, bg='darkgray')
     to_btn_plot.grid(row=5, column=3, padx=10, pady=10)
+
+    # Plot button
+    to_btn_plot = tk.Button(tab2, text="Plot", command=lambda: graph(), font=default_font, width=7, bg='darkgray')
+    to_btn_plot.grid(row=6, column=3, padx=10, pady=10)
 
     # Insert image
     img = Image.open("Equations\RTN.png")

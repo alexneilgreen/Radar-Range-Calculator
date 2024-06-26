@@ -1,6 +1,7 @@
 # tab3
 #TODO Finish Conversions
 #TODO Finish Second 2 buttons and equations
+import numpy as np
 import tkinter as tk
 from tkinter import ttk
 import matplotlib.pyplot as plt
@@ -91,9 +92,48 @@ def validateInput(input):
 
         return False
 
-#?#?#       Pₜ * Gₜ * Gᵣ * λ² * σ
-#?#?# Pᵣ = ----------------------
-#?#?#         (4π)³ * R⁴ * Pₙ
+def graph():
+    global pt_f, gt_f, gr_f, f_f, rcs_f, r_f, pn_f, snr_f
+    
+    # Generate 50 points below pr_f and 50 points above pr_f using logarithmic scale
+    points_below = np.logspace(np.log10(snr_f/100), np.log10(snr_f), num=50, endpoint=False)
+    points_above = np.logspace(np.log10(snr_f), np.log10(snr_f*100), num=50, endpoint=True)
+    
+    # Combine both lists
+    x_values = np.concatenate((points_below, points_above))
+    
+    # Generate corresponding y values based on recalculated r for each pr value
+    y_values = []
+    for snr in x_values:
+        w = (3 * 10**8) / f_f
+        num = pt_f * gt_f * gr_f * w**2 * rcs_f
+        den = (4 * 3.14159265)**3 * snr
+        r = (num / den)**0.25
+        y_values.append(r)
+    
+    # Determine the maximum range value
+    xmax_range = max(x_values) * 1.1
+    ymax_range = max(y_values) * 1.1
+
+    xmin_range = max(x_values) * -0.05
+    ymin_range = max(y_values) * -0.05
+
+    # Plotting
+    plt.figure(figsize=(8, 6))
+    plt.plot(x_values, y_values)#, marker='o', linestyle='-')
+    plt.title('Signal-to-Noise Ratio Form of Radar Range Equation')
+    plt.xlabel('Signal-to-Noise Ratio')
+    plt.ylabel('Range')
+    plt.xlim(xmin_range, xmax_range)
+    plt.ylim(ymin_range, ymax_range)
+    plt.grid(True, which="both", ls="--")
+    plt.show()
+
+    return
+
+#?#?#        Pₜ * Gₜ * Gᵣ * λ² * σ
+#?#?# SNR = ----------------------
+#?#?#          (4π)³ * R⁴ * Pₙ
 
 def calculate(pt, gt, gr, f, rcs, r, pn, snr, pt_unit, f_unit, rcs_unit, r_unit, pn_unit):
 
@@ -407,17 +447,17 @@ def calculate(pt, gt, gr, f, rcs, r, pn, snr, pt_unit, f_unit, rcs_unit, r_unit,
 
     return
 
-#?#?#       Pₜ * Gₜ * Gᵣ * λ² * σ * nₚ
-#?#?# Pᵣ = --------------------------
-#?#?#            (4π)³ * R⁴ * Pₙ
+#?#?#        Pₜ * Gₜ * Gᵣ * λ² * σ * nₚ
+#?#?# SNR = --------------------------
+#?#?#             (4π)³ * R⁴ * Pₙ
 
 def calculate_CMPE():
     # Placeholder function for plot button
     pass
 
-#?#?#       Pₜ * Gₜ * Gᵣ * λ² * σ * nₚ
-#?#?# Pᵣ = --------------------------
-#?#?#         (4π)³ * R⁴ * Pₙ * Lₛ
+#?#?#        Pₜ * Gₜ * Gᵣ * λ² * σ * nₚ
+#?#?# SNR = --------------------------
+#?#?#          (4π)³ * R⁴ * Pₙ * Lₛ
 
 def calculate_LC():
     # Placeholder function for plot button
@@ -487,17 +527,21 @@ def create_SNR_tab_content(tab3):
     snr_entry = tk.Entry(tab3)
     snr_entry.grid(row=8, column=1, padx=10, pady=10)
 
-    # Plot buttons
+    # Calc buttons
     btn_plot = tk.Button(tab3, text="Calc", command=lambda: calculate(pt_entry, gt_entry, gr_entry, f_entry, rcs_entry, r_entry, pn_entry, snr_entry, 
                                                                       pt_unit.get(), f_unit.get(), rcs_unit.get(), r_unit.get(), pn_unit.get()), 
                                                                       font=default_font, width=7, bg='darkgray')
-    btn_plot.grid(row=8, column=3, padx=10, pady=10)
+    btn_plot.grid(row=7, column=3, padx=10, pady=10)
 
     #TODO: btn_plot = tk.Button(tab3, text="Calc CMPE", command=calculate_CMPE, font=default_font, width=7, bg='darkgray')
     #TODO: btn_plot.grid(row=9, column=3, padx=10, pady=10)
 
     #TODO: btn_plot = tk.Button(tab3, text="Calc LC", command=calculate_LC, font=default_font, width=7, bg='darkgray')
     #TODO: btn_plot.grid(row=10, column=3, padx=10, pady=10)
+
+    # Plot buttons
+    btn_plot = tk.Button(tab3, text="Plot", command=lambda: graph(), font=default_font, width=7, bg='darkgray')
+    btn_plot.grid(row=8, column=3, padx=10, pady=10)
 
     # Insert image
     img = Image.open("Equations\SNR.png")

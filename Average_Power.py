@@ -1,5 +1,6 @@
 # tab4
 #TODO Finish Conversions
+import numpy as np
 import tkinter as tk
 from tkinter import ttk
 import matplotlib.pyplot as plt
@@ -92,6 +93,45 @@ def validateInput(input):
     else :
 
         return False
+
+def graph():
+    global pavg_f, td_f, gt_f, gr_f, f_f, rcs_f, r_f, pn_f, ls_f, snr_f
+    
+    # Generate 50 points below pr_f and 50 points above pr_f using logarithmic scale
+    points_below = np.logspace(np.log10(snr_f/100), np.log10(snr_f), num=50, endpoint=False)
+    points_above = np.logspace(np.log10(snr_f), np.log10(snr_f*100), num=50, endpoint=True)
+    
+    # Combine both lists
+    x_values = np.concatenate((points_below, points_above))
+    
+    # Generate corresponding y values based on recalculated r for each pr value
+    y_values = []
+    for snr in x_values:
+        w = (3 * 10**8) / f_f
+        num = pavg_f * gt_f * gr_f * w**2 * rcs_f
+        den = (4 * 3.14159265)**3 * pn_f * ls_f * snr
+        r = (num / den)**0.25
+        y_values.append(r)
+    
+    # Determine the maximum range value
+    xmax_range = max(x_values) * 1.1
+    ymax_range = max(y_values) * 1.1
+
+    xmin_range = max(x_values) * -0.05
+    ymin_range = max(y_values) * -0.05
+
+    # Plotting
+    plt.figure(figsize=(8, 6))
+    plt.plot(x_values, y_values)#, marker='o', linestyle='-')
+    plt.title('Average Power Form of Radar Range Equation')
+    plt.xlabel('Signal-to-Noise Ratio')
+    plt.ylabel('Range')
+    plt.xlim(xmin_range, xmax_range)
+    plt.ylim(ymin_range, ymax_range)
+    plt.grid(True, which="both", ls="--")
+    plt.show()
+
+    return
 
 #?#?#        Pₐᵥ₉ * Td * Gₜ * Gᵣ * λ² * σ
 #?#?# SNR = -----------------------------
@@ -575,10 +615,14 @@ def create_AP_tab_content(tab4):
     snr_entry = tk.Entry(tab4)
     snr_entry.grid(row=10, column=1, padx=10, pady=10)
 
-    # Plot button
+    # Calc button
     btn_plot = tk.Button(tab4, text="Calc", command=lambda: calculate(pavg_entry, td_entry, gt_entry, gr_entry, f_entry, rcs_entry, r_entry, pn_entry, ls_entry, 
                                                                       snr_entry, pavg_unit.get(), td_unit.get(), f_unit.get(), rcs_unit.get(), r_unit.get(), pn_unit.get()), 
                                                                       font=default_font, width=7, bg='darkgray')
+    btn_plot.grid(row=9, column=3, padx=10, pady=10)
+
+    # Plot button
+    btn_plot = tk.Button(tab4, text="Plot", command=lambda: graph(), font=default_font, width=7, bg='darkgray')
     btn_plot.grid(row=10, column=3, padx=10, pady=10)
 
     # Insert image

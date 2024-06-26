@@ -1,5 +1,6 @@
 # tab5
 
+import numpy as np
 import tkinter as tk
 from tkinter import ttk
 import matplotlib.pyplot as plt
@@ -89,6 +90,45 @@ def validateInput(input):
     else :
 
         return False
+
+def graph():
+    global prj_f, gj_f, grj_f, f_f, rjr_f, ltj_f, la_f, lr_f, prj_f
+    
+    # Generate 50 points below pr_f and 50 points above pr_f using logarithmic scale
+    points_below = np.logspace(np.log10(prj_f/100), np.log10(prj_f), num=50, endpoint=False)
+    points_above = np.logspace(np.log10(prj_f), np.log10(prj_f*100), num=50, endpoint=True)
+    
+    # Combine both lists
+    x_values = np.concatenate((points_below, points_above))
+    
+    # Generate corresponding y values based on recalculated r for each pr value
+    y_values = []
+    for prj in x_values:
+        w = (3 * 10**8) / f_f
+        num = pj_f * gj_f * grj_f * w**2
+        den = (4 * 3.14159265)**3 * ltj_f * la_f * lr_f * prj
+        rjr = (num / den)**0.5
+        y_values.append(rjr)
+    
+    # Determine the maximum range value
+    xmax_range = max(x_values) * 1.1
+    ymax_range = max(y_values) * 1.1
+
+    xmin_range = max(x_values) * -0.05
+    ymin_range = max(y_values) * -0.05
+
+    # Plotting
+    plt.figure(figsize=(8, 6))
+    plt.plot(x_values, y_values)#, marker='o', linestyle='-')
+    plt.title('Jammer One Way Link Form of Radar Range Equation')
+    plt.xlabel('Power RJ')
+    plt.ylabel('Range JR')
+    plt.xlim(xmin_range, xmax_range)
+    plt.ylim(ymin_range, ymax_range)
+    plt.grid(True, which="both", ls="--")
+    plt.show()
+
+    return
 
 #?#?#             Pⱼ * Gⱼ * Gᵣⱼ * λ²
 #?#?# Pᵣⱼ = -----------------------------
@@ -516,10 +556,14 @@ def create_JOWL_tab_content(tab5):
     prj_unit_menu = ttk.Combobox(tab5, textvariable=prj_unit, values=units_P, font=default_font, state="readonly", width=6)
     prj_unit_menu.grid(row=9, column=2, padx=10, pady=10)
 
-    # Plot button
+    # Calc button
     btn_plot = tk.Button(tab5, text="Calc", command=lambda: calculate(pj_entry, gj_entry, grj_entry, f_entry, rjr_entry, 
                                                                       ltj_entry, la_entry, lr_entry, prj_entry, pj_unit.get(),
                                                                       rjr_unit.get(), prj_unit.get()), font=default_font, width=7, bg='darkgray')
+    btn_plot.grid(row=8, column=3, padx=10, pady=10)
+
+    # Plot button
+    btn_plot = tk.Button(tab5, text="Plot", command=lambda: graph(), font=default_font, width=7, bg='darkgray')
     btn_plot.grid(row=9, column=3, padx=10, pady=10)
 
     # Insert image
