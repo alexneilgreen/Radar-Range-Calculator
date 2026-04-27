@@ -66,13 +66,13 @@ The solved value is written back into the blank input field automatically. If th
 RadarRangeCalculator/
 ├── Main.py                      # Entry point - creates the root window and tabbed notebook
 ├── requirements.txt
-└── src/                         # All calculation and UI modules
-    ├── Recieved_Power.py        # Tab 1 - received power form of the radar range equation
-    ├── Recieved_Thermal_Noise.py # Tab 2 - received thermal noise calculation
-    ├── Signal_to_Noise_Ratio.py # Tab 3 - signal-to-noise ratio calculation
-    ├── Average_Power.py         # Tab 4 - average power calculation
-    ├── Jammer_One_Way_Link.py   # Tab 5 - jammer one-way link equation
-    └── UnitConversion.py        # Shared utility module for all unit conversions
+├── src/                         # All calculation and UI modules
+│   ├── Recieved_Power.py        # Tab 1 - received power form of the radar range equation
+│   ├── Recieved_Thermal_Noise.py # Tab 2 - received thermal noise calculation
+│   ├── Signal_to_Noise_Ratio.py # Tab 3 - signal-to-noise ratio calculation
+│   ├── Average_Power.py         # Tab 4 - average power calculation
+│   ├── Jammer_One_Way_Link.py   # Tab 5 - jammer one-way link equation
+│   └── UnitConversion.py        # Shared utility module for all unit conversions
 └── Equations/                   # Reference assets
     ├── Equations.docx           # Document containing the source equations
     ├── APF.png                  # Average power formula image
