@@ -1,11 +1,11 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-import Recieved_Power
-import Recieved_Thermal_Noise
-import Signal_to_Noise_Ratio
-import Average_Power
-import Jammer_One_Way_Link
+from src import Recieved_Power
+from src import Recieved_Thermal_Noise
+from src import Signal_to_Noise_Ratio
+from src import Average_Power
+from src import Jammer_One_Way_Link
 
 root = tk.Tk()
 root.title("Radar Calculator")
