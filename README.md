@@ -6,6 +6,7 @@
 
 ![Status](https://img.shields.io/badge/status-complete-brightgreen)
 ![Language](https://img.shields.io/badge/language-Python-blue)
+![Timeline](https://img.shields.io/badge/timeline-Summer%202024-orange)
 
 ---
 
